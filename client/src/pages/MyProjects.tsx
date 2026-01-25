@@ -2,9 +2,7 @@ import { Loader2, PlusIcon, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyProjects } from "../assets/assets";
-import NavBar from "../components/NavBar";
 import type { Project } from "../types";
-import Footer from "../components/Footer";
 
 const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,8 +28,6 @@ const MyProjects = () => {
   // console.log(project);
   return (
     <>
-      <NavBar />
-
       <div className="px-4 md:px-16 lg:px-24 xl:px-32">
         {isLoading ? (
           //When its loading
@@ -146,7 +142,6 @@ const MyProjects = () => {
           </div>
         )}
       </div>
-      <Footer />
     </>
   );
 };
