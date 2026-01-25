@@ -1,5 +1,7 @@
 import { Loader } from "lucide-react";
 import { useState } from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const [input, setInput] = useState("");
@@ -16,6 +18,8 @@ const Home = () => {
 
   return (
     <>
+      <NavBar />
+
       <section className="flex flex-col items-center text-white text-sm pb-20 px-4 font-poppins">
         <a className="flex items-center gap-2 border border-slate-700 rounded-full p-1 pr-3 text-sm mt-20">
           <span className="bg-indigo-600 text-xs px-3 py-1 rounded-full">
@@ -101,6 +105,7 @@ const Home = () => {
           />
         </div>
       </section>
+      <Footer />
     </>
   );
 };

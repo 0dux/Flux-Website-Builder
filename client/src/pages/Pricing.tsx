@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { appPlans } from "../assets/assets";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 interface Plan {
   id: string;
@@ -17,6 +19,8 @@ const Pricing = () => {
 
   return (
     <>
+      <NavBar />
+
       <div className="w-full h-[80vh] mx-auto max-w-5xl max-md:px-4 z-20">
         <div className="flex flex-col gap-4 items-center justify-center mt-16">
           <h1 className="text-zinc-100 text-3xl font-medium">
@@ -82,6 +86,7 @@ const Pricing = () => {
           purchase more credits to create more projects.
         </p>
       </div>
+      <Footer />
     </>
   );
 };

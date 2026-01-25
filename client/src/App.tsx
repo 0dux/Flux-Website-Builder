@@ -1,6 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer";
-import NavBar from "./components/NavBar";
 import Community from "./pages/Community";
 import Home from "./pages/Home";
 import MyProjects from "./pages/MyProjects";
@@ -12,7 +10,6 @@ import View from "./pages/View";
 const App = () => {
   return (
     <>
-      <NavBar />
       <Routes>
         <Route path={"/"} element={<Home />} />
         <Route path={"/pricing"} element={<Pricing />} />
@@ -23,7 +20,6 @@ const App = () => {
         <Route path={"/community"} element={<Community />} />
         <Route path={"/view/:projectId"} element={<View />} />
       </Routes>
-      <Footer />
     </>
   );
 };
