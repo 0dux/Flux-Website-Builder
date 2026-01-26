@@ -5,7 +5,7 @@ import {
   SendIcon,
   UserIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import type { Message, Project, Version } from "../types";
 
@@ -27,6 +27,13 @@ const SideBar = ({
   const [input, setInput] = useState("");
 
   const handleRollback = async (versionId: string) => {};
+  const handleRevisions = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsGenerating(true);
+    setTimeout(() => {
+      setIsGenerating(false);
+    }, 3 * 1000);
+  };
 
   useEffect(() => {
     if (messageRef.current) {
@@ -53,12 +60,12 @@ const SideBar = ({
                 const msg = message as Message;
                 const isUser = msg.role === "user";
                 return (
-                  // Entire message div in sorted order
+                  // message div in sorted order
                   <div
                     key={msg.id}
                     className={`flex items-start gap-4 ${isUser ? "justify-end" : "justify-start"}`}
                   >
-                    {/* Shows a bot logo when it is not user */}
+                    {/* Show a bot logo when it is not user */}
                     {!isUser && (
                       <div className="w-8 h-8 rounded-full bg-linear-to-br from-indigo-600 to-indigo-700 flex items-center justify-center">
                         <BotIcon className="size-5 text-white" />
@@ -139,7 +146,7 @@ const SideBar = ({
           <div ref={messageRef} />
         </div>
         {/* Input area */}
-        <form className="m-4 relative">
+        <form onSubmit={handleRevisions} className="m-4 relative">
           <div className="flex items-center gap-2">
             <textarea
               onChange={(e) => setInput(e.target.value)}
@@ -149,7 +156,10 @@ const SideBar = ({
               className="flex-1 p-4 rounded-xl resize-none text-sm outline-none ring ring-zinc-700 focus:ring-indigo-500 bg-zinc-800 text-zinc-100 placeholder-zinc-400 transition-all"
               disabled={isGenerating}
             />
-            <button>
+            <button
+              disabled={isGenerating || !input.trim()}
+              className="absolute bottom-2.5 right-2.5 rounded-full bg-linear-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white transition-colors disabled:opacity-60"
+            >
               {isGenerating ? (
                 <Loader2Icon className="size-8 p-2 animate-spin text-white" />
               ) : (
