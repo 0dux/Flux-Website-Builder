@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import BackGroundImage from "./BackGroundImage";
+import GradientBlinds from "./GradientBlinds";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="z-50 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur border-b text-white border-slate-800">
+      <nav className="z-50 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur-xl bg-black/40 border-b text-white border-slate-800">
         <Link to="/">
           <img className="h-4 sm:h-6" src={assets.logo} alt="Flux Logo" />
         </Link>
@@ -96,7 +96,23 @@ const NavBar = () => {
           </button>
         </div>
       )}
-      <BackGroundImage />
+      {/* Fixed background gradient that tracks cursor */}
+      <div className="fixed inset-0 -z-10">
+        <GradientBlinds
+          gradientColors={["#5905ad", "#0154c1"]}
+          angle={150}
+          noise={0}
+          blindCount={20}
+          blindMinWidth={70}
+          spotlightRadius={0.75}
+          spotlightSoftness={0.75}
+          spotlightOpacity={1}
+          mouseDampening={0.2}
+          distortAmount={10}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
     </>
   );
 };

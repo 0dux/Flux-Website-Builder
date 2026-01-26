@@ -16,20 +16,25 @@ const App = () => {
     pathname.startsWith("/view/") ||
     pathname.startsWith("/preview/");
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       {!hideNavBar && <NavBar />}
-      <Routes>
-        <Route path={"/"} element={<Home />} />
-        <Route path={"/pricing"} element={<Pricing />} />
-        <Route path={"/projects/:projectId"} element={<Projects />} />
-        <Route path={"/projects"} element={<MyProjects />} />
-        <Route path={"/preview/:projectId"} element={<Preview />} />
-        <Route path={"/preview/:projectId/:versionId"} element={<Preview />} />
-        <Route path={"/community"} element={<Community />} />
-        <Route path={"/view/:projectId"} element={<View />} />
-      </Routes>
+      <main className="flex-1">
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/pricing"} element={<Pricing />} />
+          <Route path={"/projects/:projectId"} element={<Projects />} />
+          <Route path={"/projects"} element={<MyProjects />} />
+          <Route path={"/preview/:projectId"} element={<Preview />} />
+          <Route
+            path={"/preview/:projectId/:versionId"}
+            element={<Preview />}
+          />
+          <Route path={"/community"} element={<Community />} />
+          <Route path={"/view/:projectId"} element={<View />} />
+        </Routes>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { dummyConversations, dummyProjects } from "../assets/assets";
+import SideBar from "../components/SideBar";
 import type { Project } from "../types";
 
 const Projects = () => {
@@ -148,7 +149,15 @@ const Projects = () => {
         </div>
       </div>
       <div className="flex flex-1 overflow-auto">
-        <div>SideBar</div>
+        <div>
+          <SideBar
+            isMenuOpen={isMenuOpen}
+            project={project}
+            setProject={(p) => setProject(p)}
+            isGenerating={generating}
+            setIsGenerating={setGenerating}
+          />
+        </div>
         <div className="p-2 pl-0 flex-1">Project Preview</div>
       </div>
     </div>
