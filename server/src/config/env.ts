@@ -4,13 +4,19 @@ import { z } from "zod";
 const envSchema = z.object({
     PORT: z.string().optional(),
     TRUSTED_ORIGINS: z.string().optional(),
-    DATABASE_URL: z.string().optional(),
+    DATABASE_URL: z.string(),
+    BETTER_AUTH_SECRET: z.string(),
+    BETTER_AUTH_URL: z.string(),
+    NODE_ENV: z.string()
 });
 
-let env: {
+let envs: {
     PORT: number;
     TRUSTED_ORIGINS: string[];
     DATABASE_URL: string;
+    BETTER_AUTH_SECRET: string;
+    BETTER_AUTH_URL: string;
+    NODE_ENV: string;
 };
 
 try {
@@ -27,10 +33,13 @@ try {
         throw new Error('PORT must be a valid positive number');
     }
 
-    env = {
+    envs = {
         PORT: port,
         TRUSTED_ORIGINS: trustedOrigins,
-        DATABASE_URL: parsedEnv.DATABASE_URL as string
+        DATABASE_URL: parsedEnv.DATABASE_URL,
+        BETTER_AUTH_SECRET: parsedEnv.BETTER_AUTH_SECRET,
+        BETTER_AUTH_URL: parsedEnv.BETTER_AUTH_URL,
+        NODE_ENV: parsedEnv.NODE_ENV
     };
 } catch (error) {
     console.error("Error occurred during validation of environment variables:", error);
@@ -38,6 +47,6 @@ try {
 }
 
 
-export default env;
+export default envs;
 
 
