@@ -5,8 +5,11 @@ import {
   SendIcon,
   UserIcon,
 } from "lucide-react";
+
 import { useEffect, useRef, useState, type FormEvent } from "react";
+
 import { Link } from "react-router-dom";
+
 import type { Message, Project, Version } from "../types";
 
 interface sidebarProps {
@@ -23,6 +26,7 @@ const SideBar = ({
   isGenerating,
   setIsGenerating,
 }: sidebarProps) => {
+  
   const messageRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState("");
 

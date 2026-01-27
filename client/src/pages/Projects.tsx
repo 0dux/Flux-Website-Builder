@@ -1,6 +1,7 @@
 import ProjectPreview, {
   type ProjectPreviewRef,
 } from "@/components/ProjectPreview";
+
 import {
   ArrowBigDown,
   Eye,
@@ -14,14 +15,19 @@ import {
   Tablet,
   XIcon,
 } from "lucide-react";
+
 import { useEffect, useRef, useState } from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
+
 import {
   dummyConversations,
   dummyProjects,
   dummyVersion,
 } from "../assets/assets";
+
 import SideBar from "../components/SideBar";
+
 import type { Project } from "../types";
 
 const Projects = () => {

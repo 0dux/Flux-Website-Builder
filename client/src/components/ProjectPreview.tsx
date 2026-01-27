@@ -1,5 +1,7 @@
 import { iframeScript } from "@/assets/assets";
+
 import type { Project } from "@/types";
+
 import {
   forwardRef,
   useEffect,
@@ -7,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+
 import EditorPanel from "./EditorPanel";
 
 interface ProjectPreviewProps {
@@ -30,6 +33,7 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
       tablet: "w-[768px]",
       desktop: "w-full",
     };
+
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
     const [selectedElement, setSelectedElement] = useState<any>(null);
@@ -87,7 +91,9 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
 
     const injectPreview = (html: string) => {
       if (!html) return "";
+
       if (!showEditorPanel) return html;
+
       if (html.includes("<body/>")) {
         return html.replace("<body/>", iframeScript + "<body/>");
       } else {
