@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+import { Toaster } from "sonner";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Community from "./pages/Community";
@@ -8,6 +9,7 @@ import Preview from "./pages/Preview";
 import Pricing from "./pages/Pricing";
 import Projects from "./pages/Projects";
 import View from "./pages/View";
+import AuthPage from "./pages/auth/AuthPage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -17,6 +19,7 @@ const App = () => {
     pathname.startsWith("/preview/");
   return (
     <div className="flex flex-col min-h-screen">
+      <Toaster />
       {!hideNavBar && <NavBar />}
       <main className="flex-1">
         <Routes>
@@ -31,6 +34,7 @@ const App = () => {
           />
           <Route path={"/community"} element={<Community />} />
           <Route path={"/view/:projectId"} element={<View />} />
+          <Route path="/auth/:pathname" element={<AuthPage />} />
         </Routes>
       </main>
       <Footer />
