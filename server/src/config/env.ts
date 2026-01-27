@@ -1,16 +1,16 @@
 import "dotenv/config";
 import { z } from "zod";
 
-import "dotenv/config";
-
 const envSchema = z.object({
     PORT: z.string().optional(),
     TRUSTED_ORIGINS: z.string().optional(),
+    DATABASE_URL: z.string().optional(),
 });
 
 let env: {
     PORT: number;
     TRUSTED_ORIGINS: string[];
+    DATABASE_URL: string;
 };
 
 try {
@@ -29,14 +29,14 @@ try {
 
     env = {
         PORT: port,
-        TRUSTED_ORIGINS: trustedOrigins
+        TRUSTED_ORIGINS: trustedOrigins,
+        DATABASE_URL: parsedEnv.DATABASE_URL as string
     };
 } catch (error) {
     console.error("Error occurred during validation of environment variables:", error);
     process.exit(1);
 }
 
-console.log(env);
 
 export default env;
 
