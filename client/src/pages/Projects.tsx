@@ -37,7 +37,7 @@ const Projects = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const [generating, setGenerating] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(true);
   const [device, setDevice] = useState<"phone" | "tablet" | "desktop">(
     "desktop",
   );
@@ -56,7 +56,7 @@ const Projects = () => {
           versions: dummyVersion,
         });
         setLoading(false);
-        setGenerating(project.current_code ? false : true);
+        setIsGenerating(project.current_code ? false : true);
       }
     }, 2 * 1000);
   };
@@ -66,7 +66,7 @@ const Projects = () => {
   const downloadCode = () => {
     const code = previewRef.current?.getCode() || project?.current_code;
     if (!code) {
-      if (generating) {
+      if (isGenerating) {
         return;
       }
       return;
@@ -187,14 +187,14 @@ const Projects = () => {
             isMenuOpen={isMenuOpen}
             project={project}
             setProject={(p) => setProject(p)}
-            isGenerating={generating}
-            setIsGenerating={setGenerating}
+            isGenerating={isGenerating}
+            setIsGenerating={setIsGenerating}
           />
         </div>
         <div className="p-2 pl-0 flex-1">
           <ProjectPreview
             project={project}
-            isGenerating={generating}
+            isGenerating={isGenerating}
             device={device}
             ref={previewRef}
           />
