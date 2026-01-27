@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 const View = () => {
   const { projectId } = useParams();
   const [code, setCode] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchCode = async () => {
     const code = dummyProjects.find(
@@ -34,7 +34,7 @@ const View = () => {
     );
   }
   return (
-    <div>
+    <div className="h-screen">
       {code && (
         <ProjectPreview
           project={{ current_code: code } as Project}
