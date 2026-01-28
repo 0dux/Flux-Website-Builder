@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Development notes
-development-notes.md
+*-development-notes.md

@@ -54,3 +54,5 @@ prisma/migrations/
 # Production
 .vercel
 .netlify
+
+*-development-notes.md
