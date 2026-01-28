@@ -44,7 +44,7 @@ const Community = () => {
                   key={project.id}
                   to={`/view/${project.id}`}
                   target="_blank"
-                  className="w-72 max-sm:mx-auto cursor-pointer bg-black/60 border-zinc-700 rounded-lg overflow-hidden hover:border-indigo-800/80 border-2 transition-all duration-300"
+                  className="w-72 max-sm:mx-auto cursor-pointer bg-black border-zinc-700 rounded-lg overflow-hidden hover:border-indigo-800/80 border-2 transition-all duration-300"
                 >
                   <div className="relative bg-zinc-900 w-full h-40 overflow-hidden border-b border-zinc-800">
                     {project.current_code ? (

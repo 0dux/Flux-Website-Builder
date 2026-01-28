@@ -9,14 +9,16 @@ const app = express();
 
 const port = env.PORT;
 
+console.log(env.TRUSTED_ORIGINS);
+
 const corsOptions = {
     origin: env.TRUSTED_ORIGINS,
     credentials: true
 }
+app.use(cors(corsOptions))
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
-app.use(cors(corsOptions))
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');

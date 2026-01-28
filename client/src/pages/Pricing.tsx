@@ -32,7 +32,7 @@ const Pricing = () => {
             {plans.map((plan, idx) => (
               <div
                 key={idx}
-                className="p-6 bg-black/50 ring ring-indigo-950 mx-auto w-full max-w-sm rounded-lg text-white shadow-lg hover:ring-indigo-500 transition-all duration-400"
+                className="p-6 bg-black ring ring-indigo-950 mx-auto w-full max-w-sm rounded-lg text-white shadow-lg hover:ring-indigo-500 transition-all duration-400"
               >
                 <h3 className="text-xl font-bold">{plan.name}</h3>
                 <div className="my-2">

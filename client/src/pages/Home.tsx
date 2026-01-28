@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <>
       <section className="flex flex-col items-center text-white text-sm pb-20 px-4 font-poppins">
-        <a className="flex items-center gap-2 border border-slate-700 rounded-full p-1 pr-3 text-sm mt-20">
+        <div className="flex bg-black/80 items-center gap-2 border border-slate-700 rounded-full p-1 pr-3 text-sm mt-20">
           <span className="bg-indigo-600 text-xs px-3 py-1 rounded-full">
             NEW
           </span>
@@ -40,7 +40,7 @@ const Home = () => {
               />
             </svg>
           </p>
-        </a>
+        </div>
 
         <h1 className="text-center text-[40px] leading-12 md:text-6xl md:leading-17.5 mt-4 font-semibold max-w-3xl">
           Turn ideas into websites instantly, with AI.
@@ -53,7 +53,7 @@ const Home = () => {
 
         <form
           onSubmit={onSubmitHandler}
-          className="bg-black/40 max-w-2xl w-full rounded-xl p-4 mt-10 border border-indigo-600/70 focus-within:ring-2 ring-indigo-500 transition-all"
+          className="bg-black/80 max-w-2xl w-full rounded-xl p-4 mt-10 border border-indigo-600/70 focus-within:ring-2 ring-indigo-500 transition-all"
         >
           <textarea
             onChange={(e) => setInput(e.target.value)}
