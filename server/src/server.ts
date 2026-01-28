@@ -4,20 +4,23 @@ import "dotenv/config";
 import express, { Request, Response } from 'express';
 import env from "./config/env.js";
 import { auth } from "./lib/auth.js";
+import userRouter from "./routes/user.routes.js";
 
 const app = express();
 
 const port = env.PORT;
 
-console.log(env.TRUSTED_ORIGINS);
+// console.log(env.TRUSTED_ORIGINS);
 
 const corsOptions = {
     origin: env.TRUSTED_ORIGINS,
     credentials: true
 }
+app.use(express.json({ limit: "50mb" }))
 app.use(cors(corsOptions))
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
+app.use('/api/v1/user', userRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
