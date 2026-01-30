@@ -169,3 +169,72 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         })
     }
 }
+
+export const rollBackToVersion = async (req: Request, res: Response) => {
+    try {
+        const userId = req.userId;
+        if (!userId) {
+            return res.status(401).json({
+                message: "Unauthorized"
+            })
+        }
+
+        const { projectId, versionId } = req.params;
+
+        if (!projectId || typeof projectId !== "string") {
+            return res.status(401).json({
+                message: "Invalid details passed"
+            })
+        }
+
+        if (!versionId || typeof versionId !== "string") {
+            return res.status(401).json({
+                message: "Invalid details passed"
+            })
+        }
+
+        const project = await prisma.websiteProject.findUnique({
+            where: { id: projectId, userId },
+            include: { versions: true }
+        })
+
+        if (!project) {
+            return res.status(404).json({
+                message: "Project not found"
+            })
+        }
+
+        const version = project.versions.find((version) => version.id === versionId)
+        if (!version) {
+            return res.status(404).json({
+                message: "Version not found"
+            })
+        }
+
+        await prisma.websiteProject.update({
+            where: { id: projectId, userId },
+            data: {
+                current_code: version.code,
+                current_version_index: version.id
+            }
+        })
+
+        await prisma.conversation.create({
+            data: {
+                role: "assistant",
+                content: "I've rolled back your website to selected version. You can now preview it.",
+                projectId
+            },
+        })
+
+        res.json({
+            message: "Version rolled back"
+        })
+    } catch (error: any) {
+        console.error(error.message || error.code);
+        res.status(500).json({
+            message: error.message
+        })
+
+    }
+}
