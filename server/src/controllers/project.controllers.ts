@@ -238,3 +238,45 @@ export const rollBackToVersion = async (req: Request, res: Response) => {
 
     }
 }
+
+export const deleteProject = async (req: Request, res: Response) => {
+    try {
+        const userId = req.userId;
+        if (!userId) {
+            return res.status(401).json({
+                message: "Unauthorized user"
+            })
+        }
+
+        const { projectId } = req.params;
+
+        if (!projectId || typeof projectId !== "string") {
+            return res.status(401).json({
+                message: "Invalid details passed"
+            })
+        }
+
+        await prisma.websiteProject.delete({
+            where: { id: projectId, userId },
+        })
+
+        await prisma.conversation.create({
+            data: {
+                role: "assistant",
+                content: "Project deleted successfully",
+                projectId
+            }
+        })
+
+        res.json({
+            message: "Project deleted"
+        })
+    } catch (error: any) {
+        console.error(error.message || error.code);
+        res.status(500).json({
+            message: error.message
+        })
+
+    }
+}
+
