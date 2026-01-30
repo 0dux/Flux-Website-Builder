@@ -390,18 +390,30 @@ export const saveProjectCode = async (req: Request, res: Response) => {
         }
 
         const { code } = req.body;
+        if (!code) {
+            return res.status(400).json({ message: "Code is required" })
+        }
 
         const project = await prisma.websiteProject.findUnique({
-            where: { id: projectId },
+            where: { id: projectId, userId },
         })
 
-        if (!project || project.isPublished === false || !project.current_code) {
+        if (!project) {
             return res.status(404).json({
                 message: "Project not found"
             })
         }
+
+        await prisma.websiteProject.update({
+            where: { id: projectId, userId },
+            data: {
+                current_code: code,
+                current_version_index: ""
+            }
+        })
+
         return res.json({
-            code: project.current_code
+            message: "Project saved successfully"
         })
     } catch (error: any) {
         console.error(error.message || error.code);

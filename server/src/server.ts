@@ -4,6 +4,7 @@ import "dotenv/config";
 import express, { Request, Response } from 'express';
 import env from "./config/env.js";
 import { auth } from "./lib/auth.js";
+import projectRouter from "./routes/project.routes.js";
 import userRouter from "./routes/user.routes.js";
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors(corsOptions))
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/project', projectRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
