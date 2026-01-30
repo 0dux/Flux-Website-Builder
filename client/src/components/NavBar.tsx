@@ -1,15 +1,33 @@
+import api from "@/configs/axios";
 import { authClient } from "@/lib/auth-client";
 import { UserButton } from "@daveyplate/better-auth-ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { assets } from "../assets/assets";
 import GradientBlinds from "./GradientBlinds";
 
 const NavBar = () => {
+  const [credits, setCredits] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const { data: session } = authClient.useSession();
+  const getCredits = async () => {
+    try {
+      const { data } = await api.get("/api/v1/user/credits");
+      setCredits(data.credits);
+    } catch (error: any) {
+      toast.error(error?.reponse?.data?.message || error.message);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (session?.user) {
+      getCredits();
+    }
+  }, [session?.user]);
   return (
     <>
       <nav className="z-50 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur-xl bg-black/40 border-b text-white border-slate-800">
@@ -41,7 +59,12 @@ const NavBar = () => {
               Get started
             </button>
           ) : (
-            <UserButton size="icon" />
+            <>
+              <button className="border border-dashed border-zinc-200 bg-white/10 rounded-2xl px-5 py-1 text-xs sm:text-sm">
+                Credits : <span className="text-indigo-300">{credits}</span>
+              </button>
+              <UserButton size="icon" />
+            </>
           )}
           <button
             id="open-menu"
