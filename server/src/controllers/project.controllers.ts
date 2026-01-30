@@ -227,12 +227,12 @@ export const rollBackToVersion = async (req: Request, res: Response) => {
             },
         })
 
-        res.json({
+        return res.json({
             message: "Version rolled back"
         })
     } catch (error: any) {
         console.error(error.message || error.code);
-        res.status(500).json({
+        return res.status(500).json({
             message: error.message
         })
 
@@ -268,8 +268,48 @@ export const deleteProject = async (req: Request, res: Response) => {
             }
         })
 
-        res.json({
+        return res.json({
             message: "Project deleted"
+        })
+    } catch (error: any) {
+        console.error(error.message || error.code);
+        return res.status(500).json({
+            message: error.message
+        })
+
+    }
+}
+
+export const getProjectPreview = async (req: Request, res: Response) => {
+    try {
+        const userId = req.userId;
+        if (!userId) {
+            return res.status(401).json({
+                message: "Unauthorized user"
+            })
+        }
+
+        const { projectId } = req.params;
+
+        if (!projectId || typeof projectId !== "string") {
+            return res.status(401).json({
+                message: "Invalid details passed"
+            })
+        }
+
+        const project = await prisma.websiteProject.findUnique({
+            where: { id: projectId, userId },
+            include: { versions: true }
+        })
+
+        if (!project) {
+            return res.status(404).json({
+                message: "Project not found"
+            })
+        }
+
+        return res.json({
+            project
         })
     } catch (error: any) {
         console.error(error.message || error.code);
@@ -279,4 +319,3 @@ export const deleteProject = async (req: Request, res: Response) => {
 
     }
 }
-
