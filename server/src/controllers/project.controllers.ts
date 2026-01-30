@@ -45,7 +45,7 @@ export const makeRevisions = async (req: Request, res: Response) => {
 
         if (!currentProject) {
             return res.status(404).json({
-                message: "Project not found.    "
+                message: "Project not found."
             })
         }
 
@@ -105,8 +105,8 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
             model: "z-ai/glm-4.5-air:free",
             messages: [
                 {
-                    "role": "system",
-                    "content": `You are an expert web developer. 
+                    role: "system",
+                    content: `You are an expert web developer. 
 
     CRITICAL REQUIREMENTS:
     - Return ONLY the complete updated HTML code with the requested changes.
@@ -157,12 +157,14 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
             message: "Changes made succesfully"
         })
     } catch (error: any) {
-        await prisma.user.update({
-            where: { id: userId },
-            data: {
-                credits: { decrement: 5 }
-            }
-        })
+        if (userId) {
+            await prisma.user.update({
+                where: { id: userId },
+                data: {
+                    credits: { increment: 5 }
+                }
+            })
+        }
         console.error("error:: ", error.message);
         return res.status(500).json({
             message: error.message
@@ -182,13 +184,13 @@ export const rollBackToVersion = async (req: Request, res: Response) => {
         const { projectId, versionId } = req.params;
 
         if (!projectId || typeof projectId !== "string") {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Invalid details passed"
             })
         }
 
         if (!versionId || typeof versionId !== "string") {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Invalid details passed"
             })
         }
@@ -251,7 +253,7 @@ export const deleteProject = async (req: Request, res: Response) => {
         const { projectId } = req.params;
 
         if (!projectId || typeof projectId !== "string") {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Invalid details passed"
             })
         }
@@ -292,7 +294,7 @@ export const getProjectPreview = async (req: Request, res: Response) => {
         const { projectId } = req.params;
 
         if (!projectId || typeof projectId !== "string") {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Invalid details passed"
             })
         }
@@ -343,10 +345,51 @@ export const getProjectById = async (req: Request, res: Response) => {
     try {
         const { projectId } = req.params;
         if (!projectId || typeof projectId !== "string") {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Invalid project"
             })
         }
+
+        const project = await prisma.websiteProject.findUnique({
+            where: { id: projectId },
+        })
+
+        if (!project || project.isPublished === false || !project.current_code) {
+            return res.status(404).json({
+                message: "Project not found"
+            })
+        }
+        return res.json({
+            code: project.current_code
+        })
+    } catch (error: any) {
+        console.error(error.message || error.code);
+        res.status(500).json({
+            message: error.message
+        })
+
+    }
+}
+
+
+export const saveProjectCode = async (req: Request, res: Response) => {
+    try {
+        const userId = req.userId;
+
+        if (!userId || typeof userId !== "string") {
+            return res.status(401).json({
+                message: "Unauthorized user"
+            })
+        }
+
+        const { projectId } = req.params;
+        if (!projectId || typeof projectId !== "string") {
+            return res.status(400).json({
+                message: "Invalid project"
+            })
+        }
+
+        const { code } = req.body;
 
         const project = await prisma.websiteProject.findUnique({
             where: { id: projectId },
