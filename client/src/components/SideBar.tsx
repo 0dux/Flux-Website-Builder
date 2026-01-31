@@ -10,6 +10,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import { Link } from "react-router-dom";
 
+import api from "@/configs/axios";
+import { toast } from "sonner";
 import type { Message, Project, Version } from "../types";
 
 interface sidebarProps {
@@ -26,17 +28,68 @@ const SideBar = ({
   isGenerating,
   setIsGenerating,
 }: sidebarProps) => {
-  
   const messageRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState("");
 
-  const handleRollback = async (versionId: string) => {};
+  const handleRollback = async (versionId: string) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to rollback to this version?",
+      );
+      if (!confirm) {
+        return;
+      }
+      setIsGenerating(true);
+      const { data } = await api.get(
+        `/api/v1/project/rollback/${project.id}/${versionId}`,
+      );
+      setIsGenerating(true);
+      const { data: data2 } = await api.get(
+        `/api/v1/user/project/${project.id}`,
+      );
+      toast.success(data.message);
+      setProject(data2.project);
+      setIsGenerating(false);
+    } catch (error: any) {
+      setIsGenerating(false);
+      toast.error(error?.response?.data?.message || error.message);
+      console.error(error);
+    }
+  };
+
+  const fetchProject = async () => {
+    try {
+      const { data } = await api.get(`/api/v1/user/project/${project.id}`);
+      setProject(data.project);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.error(error);
+    }
+  };
+
   const handleRevisions = async (e: FormEvent) => {
     e.preventDefault();
-    setIsGenerating(true);
-    setTimeout(() => {
+    let interval: number | undefined;
+    try {
+      setIsGenerating(true);
+      interval = setInterval(() => {
+        fetchProject();
+      }, 10 * 1000);
+      const { data } = await api.post(
+        `/api/v1/project/revision/${project.id}`,
+        { message: input },
+      );
+      fetchProject();
+      toast.success(data.message);
+      setInput("");
+      clearInterval(interval);
       setIsGenerating(false);
-    }, 3 * 1000);
+    } catch (error: any) {
+      setIsGenerating(false);
+      toast.error(error?.response?.data?.message || error.message);
+      console.error(error);
+      clearInterval(interval);
+    }
   };
 
   useEffect(() => {

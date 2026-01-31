@@ -126,6 +126,23 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
 
         const code = codeGenerationResponse.choices[0].message.content || "";
 
+        if (!code) {
+            await prisma.user.update({
+                where: { id: userId },
+                data: { credits: { increment: 5 } }
+            })
+            await prisma.conversation.create({
+                data: {
+                    role: "assistant",
+                    content: "Some error has occured during project generation. Your deducted credits have been refunded.",
+                    projectId
+                }
+            })
+            return res.status(403).json({
+                message: "Code was not generated api rate limit."
+            })
+        }
+
         const version = await prisma.version.create({
             data: {
                 code: code.replace(/```[a-z]*\n?/gi, '')

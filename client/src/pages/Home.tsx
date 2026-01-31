@@ -11,7 +11,6 @@ const Home = () => {
   const { data: session } = authClient.useSession();
   const navigate = useNavigate();
 
-  // Form-submit Handler
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     // console.log("Session:", session);
@@ -33,7 +32,7 @@ const Home = () => {
       navigate(`/projects/${data.projectId}`);
     } catch (error: any) {
       setIsLoading(false);
-      toast.error(error.response.data.message || error.message);
+      toast.error(error?.response?.data?.message || error.message);
       console.error(error.message);
     }
   };

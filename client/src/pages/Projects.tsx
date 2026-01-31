@@ -35,11 +35,11 @@ const Projects = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [device, setDevice] = useState<"phone" | "tablet" | "desktop">(
     "desktop",
   );
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
 
   const previewRef = useRef<ProjectPreviewRef>(null);
 
@@ -56,7 +56,9 @@ const Projects = () => {
   };
 
   const saveProject = async () => {};
+
   const togglePublish = async () => {};
+
   const downloadCode = () => {
     const code = previewRef.current?.getCode() || project?.current_code;
     if (!code) {
@@ -66,6 +68,7 @@ const Projects = () => {
       return;
     }
 
+    //download logic
     const element = document.createElement("a");
     const file = new Blob([code], { type: "text/html" });
     element.href = URL.createObjectURL(file);
@@ -74,6 +77,7 @@ const Projects = () => {
     element.click();
     element.remove();
   };
+
   useEffect(() => {
     if (session?.user) {
       fetchProject();
@@ -84,10 +88,12 @@ const Projects = () => {
   }, [session?.user]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchProject();
-    }, 10 * 1000);
-    return () => clearInterval(interval);
+    if (project && !project.current_code) {
+      const interval = setInterval(() => {
+        fetchProject();
+      }, 10 * 1000);
+      return () => clearInterval(interval);
+    }
   }, [project]);
 
   if (isLoading) {
