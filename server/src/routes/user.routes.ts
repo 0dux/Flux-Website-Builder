@@ -10,6 +10,7 @@ userRouter.get("/project/:projectId", protect, getUserProject);
 userRouter.get("/get-all-projects", protect, getUserAllProjects);
 userRouter.get("/publish-toggle/:projectId", protect, togglePublish);
 userRouter.post("/purchase-credits", protect, purchaseCredits);
+// userRouter.post("/project-test", protect, test);
 
 
 export default userRouter;

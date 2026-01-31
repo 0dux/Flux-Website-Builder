@@ -8,7 +8,8 @@ const envSchema = z.object({
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string(),
     NODE_ENV: z.string(),
-    OPENROUTER_API_KEY: z.string()
+    OPENROUTER_API_KEY: z.string(),
+
 });
 
 let envs: {

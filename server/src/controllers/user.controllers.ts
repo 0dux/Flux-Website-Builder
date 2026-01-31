@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import openai from "../config/ai.js";
+import openai from "../config/openai.js";
 import { prisma } from "../lib/prisma.js";
 
 
@@ -31,7 +31,7 @@ export const getUserCredits = async (req: Request, res: Response) => {
 
 // Create a new project
 export const createNewProject = async (req: Request, res: Response) => {
-    const userId = req.userId; // Declare outside try-catch
+    const userId = req.userId;
 
     try {
         const { initial_prompt } = req.body;
@@ -89,7 +89,7 @@ export const createNewProject = async (req: Request, res: Response) => {
         })
 
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: "z-ai/glm-4.5-air:free",
+            model: "arcee-ai/trinity-large-preview:free",
             messages: [
                 {
                     role: "system",
@@ -132,7 +132,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         // Generate website code
 
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: "z-ai/glm-4.5-air:free",
+            model: "arcee-ai/trinity-large-preview:free",
             messages: [
                 {
                     "role": "system",
@@ -196,14 +196,10 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
                 current_version_index: version.id
             }
         })
-
-        return res.json({
-            projectId: project.id
-        })
     } catch (error: any) {
         await prisma.user.update({
             where: { id: userId },
-            data: { credits: { decrement: 5 } }
+            data: { credits: { increment: 5 } }
         })
         console.error("error:: ", error.message);
         return res.status(500).json({

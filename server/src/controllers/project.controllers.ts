@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import openai from "../config/ai.js";
+import openai from "../config/openai.js";
 import { prisma } from "../lib/prisma.js";
 
 export const makeRevisions = async (req: Request, res: Response) => {
@@ -63,7 +63,7 @@ export const makeRevisions = async (req: Request, res: Response) => {
         })
 
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: "z-ai/glm-4.5-air:free",
+            model: "arcee-ai/trinity-large-preview:free",
             messages: [
                 {
                     role: "system",
@@ -102,7 +102,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         })
 
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: "z-ai/glm-4.5-air:free",
+            model: "arcee-ai/trinity-large-preview:free",
             messages: [
                 {
                     role: "system",
