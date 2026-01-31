@@ -187,7 +187,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             }
         })
 
-        return await prisma.websiteProject.update({
+        await prisma.websiteProject.update({
             where: { id: project.id },
             data: {
                 current_code: code.replace(/```[a-z]*\n?/gi, '')
@@ -195,6 +195,10 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
                     .trim(),
                 current_version_index: version.id
             }
+        })
+
+        return res.json({
+            projectId: project.id
         })
     } catch (error: any) {
         await prisma.user.update({

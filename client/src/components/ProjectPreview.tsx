@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import EditorPanel from "./EditorPanel";
+import LoaderSteps from "./LoaderSteps";
 
 interface ProjectPreviewProps {
   project: Project;
@@ -128,7 +129,11 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
             )}
           </>
         ) : (
-          isGenerating && <div>Loading</div>
+          isGenerating && (
+            <div className="flex items-center justify-center w-full h-full">
+              <LoaderSteps />
+            </div>
+          )
         )}
       </div>
     );
