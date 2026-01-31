@@ -279,14 +279,6 @@ export const deleteProject = async (req: Request, res: Response) => {
             where: { id: projectId, userId },
         })
 
-        await prisma.conversation.create({
-            data: {
-                role: "assistant",
-                content: "Project deleted successfully",
-                projectId
-            }
-        })
-
         return res.json({
             message: "Project deleted"
         })

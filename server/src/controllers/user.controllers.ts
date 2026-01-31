@@ -327,7 +327,7 @@ export const togglePublish = async (req: Request, res: Response) => {
         });
 
         return res.json({
-            message: !project.isPublished ? "Project is now Unpublished" : "Project is now Published"
+            message: !project.isPublished ? "Project is now Published" : "Project is now Unpublished"
         })
 
     } catch (error: any) {

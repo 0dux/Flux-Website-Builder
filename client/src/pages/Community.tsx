@@ -1,7 +1,8 @@
+import api from "@/configs/axios";
 import { Loader2, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { dummyProjects } from "../assets/assets";
+import { toast } from "sonner";
 import type { Project } from "../types";
 
 const Community = () => {
@@ -10,11 +11,14 @@ const Community = () => {
   const navigate = useNavigate();
 
   const fetchAllProjects = async () => {
-    //simulate fetching logic
-    setTimeout(() => {
+    try {
+      const { data } = await api.get("/api/v1/project/published");
+      setProjects(data.projects);
       setIsLoading(false);
-      setProjects(dummyProjects);
-    }, 5 * 1000);
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
 
   useEffect(() => {

@@ -55,9 +55,38 @@ const Projects = () => {
     }
   };
 
-  const saveProject = async () => {};
+  const saveProject = async () => {
+    if (!previewRef.current) return;
+    const code = previewRef.current.getCode();
+    if (!code) return;
+    setIsSaving(true);
+    try {
+      const { data } = await api.put(`/api/v1/project/save/${projectId}`, {
+        code,
+      });
+      toast.success(data.message);
+    } catch (error: any) {
+      toast.error(error?.reponse?.data?.message || error.message);
+      console.error(error.message);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
-  const togglePublish = async () => {};
+  const togglePublish = async () => {
+    try {
+      const { data } = await api.get(
+        `/api/v1/user/publish-toggle/${projectId}`,
+      );
+      toast.success(data.message);
+      setProject((prev) =>
+        prev ? { ...prev, isPublished: !prev.isPublished } : null,
+      );
+    } catch (error: any) {
+      toast.error(error?.reponse?.data?.message || error.message);
+      console.error(error.message);
+    }
+  };
 
   const downloadCode = () => {
     const code = previewRef.current?.getCode() || project?.current_code;

@@ -1,9 +1,10 @@
-import { dummyProjects } from "@/assets/assets";
 import ProjectPreview from "@/components/ProjectPreview";
+import api from "@/configs/axios";
 import type { Project } from "@/types";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const View = () => {
   const { projectId } = useParams();
@@ -11,15 +12,14 @@ const View = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCode = async () => {
-    const code = dummyProjects.find(
-      (project) => project.id === projectId,
-    )?.current_code;
-    setTimeout(() => {
-      if (code) {
-        setCode(code);
-        setIsLoading(false);
-      }
-    }, 2 * 1000);
+    try {
+      const { data } = await api.get(`/api/v1/project/published/${projectId}`);
+      setCode(data.code);
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
 
   useEffect(() => {
