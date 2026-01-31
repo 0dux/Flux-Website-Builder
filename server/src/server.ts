@@ -25,9 +25,9 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/project', projectRouter);
 
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Server is Live!');
-});
+// app.get('/', (req: Request, res: Response) => {
+//     res.send('Server is Live!');
+// });
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

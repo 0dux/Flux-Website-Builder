@@ -1,6 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import Footer from "./components/Footer";
+import GradientBlinds from "./components/GradientBlinds";
 import NavBar from "./components/NavBar";
 import AuthPage from "./pages/auth/AuthPage";
 import Community from "./pages/Community";
@@ -20,6 +21,24 @@ const App = () => {
     pathname.startsWith("/preview/");
   return (
     <div className="flex flex-col min-h-screen">
+      {!hideNavBar && (
+        <div className="fixed inset-0 -z-10">
+          <GradientBlinds
+            gradientColors={["#5905ad", "#0154c1"]}
+            angle={150}
+            noise={0}
+            blindCount={20}
+            blindMinWidth={70}
+            spotlightRadius={0.75}
+            spotlightSoftness={0.75}
+            spotlightOpacity={1}
+            mouseDampening={0.2}
+            distortAmount={10}
+            shineDirection="left"
+            mixBlendMode="lighten"
+          />
+        </div>
+      )}
       <Toaster />
       {!hideNavBar && <NavBar />}
       <main className="flex-1">

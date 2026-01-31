@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { assets } from "../assets/assets";
-import GradientBlinds from "./GradientBlinds";
 
 const NavBar = () => {
-  const [credits, setCredits] = useState(0);
+  const [credits, setCredits] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
+
   const getCredits = async () => {
     try {
       const { data } = await api.get("/api/v1/user/credits");
@@ -28,6 +28,7 @@ const NavBar = () => {
       getCredits();
     }
   }, [session?.user]);
+
   return (
     <>
       <nav className="z-50 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur-xl bg-black/40 border-b text-white border-slate-800">
@@ -51,7 +52,9 @@ const NavBar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {!session?.user ? (
+          {isPending ? (
+            <div className="w-24 h-8 bg-white/10 rounded animate-pulse" />
+          ) : !session?.user ? (
             <button
               onClick={() => navigate("/auth/signin")}
               className="px-6 py-1.5 max-sm:text-sm bg-indigo-600 active:scale-95 hover:bg-indigo-700 transition rounded"
@@ -61,7 +64,8 @@ const NavBar = () => {
           ) : (
             <>
               <button className="border border-dashed border-zinc-200 bg-white/10 rounded-2xl px-5 py-1 text-xs sm:text-sm">
-                Credits : <span className="text-indigo-300">{credits}</span>
+                Credits :{" "}
+                <span className="text-indigo-300">{credits ?? "..."}</span>
               </button>
               <UserButton size="icon" />
             </>
@@ -126,23 +130,6 @@ const NavBar = () => {
           </button>
         </div>
       )}
-      {/* Fixed background gradient that tracks cursor */}
-      <div className="fixed inset-0 -z-10">
-        <GradientBlinds
-          gradientColors={["#5905ad", "#0154c1"]}
-          angle={150}
-          noise={0}
-          blindCount={20}
-          blindMinWidth={70}
-          spotlightRadius={0.75}
-          spotlightSoftness={0.75}
-          spotlightOpacity={1}
-          mouseDampening={0.2}
-          distortAmount={10}
-          shineDirection="left"
-          mixBlendMode="lighten"
-        />
-      </div>
     </>
   );
 };
