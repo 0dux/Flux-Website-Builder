@@ -11,9 +11,10 @@ const Home = () => {
   const { data: session } = authClient.useSession();
   const navigate = useNavigate();
 
+  // Form-submit Handler
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Session:", session);
+    // console.log("Session:", session);
 
     try {
       if (!session?.user) {
@@ -27,7 +28,7 @@ const Home = () => {
         initial_prompt: input,
       });
       setIsLoading(false);
-      console.log("Data Obj:", data);
+      // console.log("Data Obj:", data);
 
       navigate(`/projects/${data.projectId}`);
     } catch (error: any) {

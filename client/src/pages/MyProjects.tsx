@@ -1,7 +1,6 @@
 import { Loader2, PlusIcon, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyProjects } from "../assets/assets";
 import type { Project } from "../types";
 
 const MyProjects = () => {
@@ -13,13 +12,7 @@ const MyProjects = () => {
     console.log("Project Deleted :: ", projectId);
   };
 
-  const fetchProjects = async () => {
-    //simulate fetching logic
-    setTimeout(() => {
-      setIsLoading(false);
-      setProjects(dummyProjects);
-    }, 5 * 1000);
-  };
+  const fetchProjects = async () => {};
 
   useEffect(() => {
     fetchProjects();

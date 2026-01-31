@@ -53,7 +53,7 @@ const NavBar = () => {
 
         <div className="flex items-center gap-3">
           {isPending ? (
-            <div className="w-24 h-8 bg-white/10 rounded animate-pulse" />
+            <div className="w-24 h-8 bg-white/10 rounded-full animate-pulse" />
           ) : !session?.user ? (
             <button
               onClick={() => navigate("/auth/signin")}

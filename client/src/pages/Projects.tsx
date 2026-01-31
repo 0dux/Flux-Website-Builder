@@ -20,45 +20,39 @@ import { useEffect, useRef, useState } from "react";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import {
-  dummyConversations,
-  dummyProjects,
-  dummyVersion,
-} from "../assets/assets";
-
 import SideBar from "../components/SideBar";
 
+import api from "@/configs/axios";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 import type { Project } from "../types";
 
 const Projects = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const { data: session, isPending } = authClient.useSession();
 
   const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(true);
   const [device, setDevice] = useState<"phone" | "tablet" | "desktop">(
     "desktop",
   );
-
-  const previewRef = useRef<ProjectPreviewRef>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const previewRef = useRef<ProjectPreviewRef>(null);
+
   const fetchProject = async () => {
-    const project = dummyProjects.find((proj) => proj.id === projectId);
-    setTimeout(() => {
-      if (project) {
-        setProject({
-          ...project,
-          conversation: dummyConversations,
-          versions: dummyVersion,
-        });
-        setLoading(false);
-        setIsGenerating(project.current_code ? false : true);
-      }
-    }, 2 * 1000);
+    try {
+      const { data } = await api.get(`/api/v1/user/project/${projectId}`);
+      setProject(data.project);
+      setIsGenerating(data.project.current_code ? false : true);
+      setIsLoading(false);
+    } catch (error: any) {
+      toast.error(error?.reponse?.data?.message || error.message);
+      console.error(error.message);
+    }
   };
 
   const saveProject = async () => {};
@@ -78,13 +72,25 @@ const Projects = () => {
     element.download = "index.html";
     document.body.appendChild(element);
     element.click();
+    element.remove();
   };
+  useEffect(() => {
+    if (session?.user) {
+      fetchProject();
+    } else if (!isPending && !session?.user) {
+      navigate("/");
+      toast.message("Please login to view you projects");
+    }
+  }, [session?.user]);
 
   useEffect(() => {
-    fetchProject();
-  }, []);
+    const interval = setInterval(() => {
+      fetchProject();
+    }, 10 * 1000);
+    return () => clearInterval(interval);
+  }, [project]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
         <Loader2 className="size-8 animate-spin text-violet-200" />
