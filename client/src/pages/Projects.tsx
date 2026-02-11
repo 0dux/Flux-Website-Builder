@@ -140,7 +140,7 @@ const Projects = () => {
         {/* Left */}
         <div className="flex items-center gap-2 sm:min-w-90 text-nowrap">
           <img
-            src="/favicon.svg"
+            src="/favicon.png"
             alt="Flux logo"
             onClick={() => navigate("/")}
             className="h-6 cursor-pointer"

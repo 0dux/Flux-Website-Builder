@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "tsx ./src/server.ts",
     "server": "nodemon --exec tsx ./src/server.ts",
