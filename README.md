@@ -82,11 +82,11 @@ FLUX is an AI-powered website builder that enables users to create and refine we
 
 ### Development & Tools
 
-| Logo                                                                                                        | Technology   | Purpose                                             |
-| ----------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------- |
-| ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)                | **Git**      | Version control system for tracking code changes    |
-| ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)                | **npm**      | Package manager for JavaScript dependencies         |
-| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black) | **Prettier** | Code formatter for consistent code style            |
+| Logo                                                                                                        | Technology   | Purpose                                          |
+| ----------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------ |
+| ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)                | **Git**      | Version control system for tracking code changes |
+| ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)                | **npm**      | Package manager for JavaScript dependencies      |
+| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black) | **Prettier** | Code formatter for consistent code style         |
 
 ---
 
@@ -259,32 +259,32 @@ flux-site-builder/
 
 ### Authentication
 
-```
-ALL  /api/auth/*          # Better-Auth handlers
-```
+| Method | Endpoint      | Description                                            |
+| ------ | ------------- | ------------------------------------------------------ |
+| ALL    | `/api/auth/*` | Better-Auth handlers (login, signup, logout, sessions) |
 
 ### User Routes
 
-```
-GET    /api/v1/user/credits                    # Get credit balance
-POST   /api/v1/user/project                    # Create new project
-GET    /api/v1/user/project/:projectId         # Get project details
-GET    /api/v1/user/get-all-projects           # List all projects
-GET    /api/v1/user/publish-toggle/:projectId  # Toggle publish status
-POST   /api/v1/user/purchase-credits           # Buy credits
-```
+| Method | Endpoint                                 | Description                              |
+| ------ | ---------------------------------------- | ---------------------------------------- |
+| GET    | `/api/v1/user/credits`                   | Get current user's credit balance        |
+| POST   | `/api/v1/user/project`                   | Create new project                       |
+| GET    | `/api/v1/user/project/:projectId`        | Get project details                      |
+| GET    | `/api/v1/user/get-all-projects`          | List all projects for authenticated user |
+| GET    | `/api/v1/user/publish-toggle/:projectId` | Toggle project publish status            |
+| POST   | `/api/v1/user/purchase-credits`          | Purchase additional credits              |
 
 ### Project Routes
 
-```
-POST   /api/v1/project/revision/:projectId               # AI revision (5 credits)
-PUT    /api/v1/project/save/:projectId                   # Save manually
-GET    /api/v1/project/rollback/:projectId/:versionId    # Restore version
-DELETE /api/v1/project/:projectId                        # Delete project
-GET    /api/v1/project/preview/:projectId                # Get preview
-GET    /api/v1/project/published                         # List published
-GET    /api/v1/project/published/:projectId              # Get published project
-```
+| Method | Endpoint                                         | Description                            |
+| ------ | ------------------------------------------------ | -------------------------------------- |
+| POST   | `/api/v1/project/revision/:projectId`            | Generate AI revision (costs 5 credits) |
+| PUT    | `/api/v1/project/save/:projectId`                | Save project manually without AI       |
+| GET    | `/api/v1/project/rollback/:projectId/:versionId` | Restore previous version               |
+| DELETE | `/api/v1/project/:projectId`                     | Delete project permanently             |
+| GET    | `/api/v1/project/preview/:projectId`             | Get preview of project                 |
+| GET    | `/api/v1/project/published`                      | List all published projects            |
+| GET    | `/api/v1/project/published/:projectId`           | Get published project details          |
 
 ---
 
