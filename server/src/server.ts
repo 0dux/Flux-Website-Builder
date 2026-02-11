@@ -1,7 +1,7 @@
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import "dotenv/config";
-import express, { Request, Response } from 'express';
+import express from 'express';
 import env from "./config/env.js";
 import { auth } from "./lib/auth.js";
 import projectRouter from "./routes/project.routes.js";
