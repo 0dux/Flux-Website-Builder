@@ -60,7 +60,7 @@ FLUX is an AI-powered website builder that enables users to create and refine we
 
 | Logo                                                                                                                    | Technology          | Purpose                                                               |
 | ----------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------------- |
-| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)                     | **React 18**        | Core UI framework for building interactive user interface             |
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)                     | **React 19**        | Core UI framework for building interactive user interface             |
 | ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)       | **TypeScript**      | Type-safe JavaScript for better code quality and developer experience |
 | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)                         | **Vite**            | Lightning-fast build tool and development server                      |
 | ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) | **React Router v6** | Client-side routing and navigation                                    |
@@ -86,7 +86,6 @@ FLUX is an AI-powered website builder that enables users to create and refine we
 | ----------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------- |
 | ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)                | **Git**      | Version control system for tracking code changes    |
 | ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)                | **npm**      | Package manager for JavaScript dependencies         |
-| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)       | **ESLint**   | Linting tool for identifying and fixing code issues |
 | ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black) | **Prettier** | Code formatter for consistent code style            |
 
 ---
