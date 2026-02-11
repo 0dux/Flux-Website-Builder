@@ -22,11 +22,6 @@ const limiter = rateLimit({
     message: { message: "Too many requests, please try again later" }
 });
 
-const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 5,
-    message: { message: "Too many login attempts, please try again later" }
-});
 
 app.use(limiter)
 
@@ -36,7 +31,6 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-app.use('/api/auth/{*any}', authLimiter);
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/project', projectRouter);

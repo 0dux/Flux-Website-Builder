@@ -75,6 +75,12 @@ const Home = () => {
         </p>
 
         <form
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              onSubmitHandler(e);
+            }
+          }}
           onSubmit={onSubmitHandler}
           className="bg-black/80 max-w-2xl w-full rounded-xl p-4 mt-10 border border-indigo-600/70 focus-within:ring-2 ring-indigo-500 transition-all"
         >

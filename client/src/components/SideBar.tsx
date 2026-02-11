@@ -203,7 +203,16 @@ const SideBar = ({
           <div ref={messageRef} />
         </div>
         {/* Input area */}
-        <form onSubmit={handleRevisions} className="m-4 relative">
+        <form
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleRevisions(e);
+            }
+          }}
+          onSubmit={handleRevisions}
+          className="m-4 relative"
+        >
           <div className="flex items-center gap-2">
             <textarea
               onChange={(e) => setInput(e.target.value)}
