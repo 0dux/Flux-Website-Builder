@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       social={{
         providers: ["google"],
       }}
-      baseURL="http://localhost:5173"
+      baseURL={import.meta.env.VITE_REDIRECT_URL}
     >
       {children}
     </AuthUIProvider>
