@@ -9,7 +9,8 @@ const envSchema = z.object({
     BETTER_AUTH_URL: z.string(),
     NODE_ENV: z.string(),
     OPENROUTER_API_KEY: z.string(),
-
+    GOOGLE_CLIENT_ID: z.string(),
+    GOOGLE_CLIENT_SECRET: z.string(),
 });
 
 let envs: {
@@ -20,6 +21,8 @@ let envs: {
     BETTER_AUTH_URL: string;
     NODE_ENV: string;
     OPENROUTER_API_KEY: string;
+    GOOGLE_CLIENT_ID: string;
+    GOOGLE_CLIENT_SECRET: string;
 };
 
 try {
@@ -44,6 +47,8 @@ try {
         BETTER_AUTH_URL: parsedEnv.BETTER_AUTH_URL,
         NODE_ENV: parsedEnv.NODE_ENV,
         OPENROUTER_API_KEY: parsedEnv.OPENROUTER_API_KEY,
+        GOOGLE_CLIENT_ID: parsedEnv.GOOGLE_CLIENT_ID,
+        GOOGLE_CLIENT_SECRET: parsedEnv.GOOGLE_CLIENT_SECRET,
     };
 } catch (error) {
     console.error("Error occurred during validation of environment variables:", error);

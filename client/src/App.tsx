@@ -21,26 +21,28 @@ const App = () => {
     pathname.startsWith("/preview/");
   return (
     <div className="flex flex-col min-h-screen">
-      {!hideNavBar && (
-        <div className="fixed inset-0 -z-10">
-          <GradientBlinds
-            gradientColors={["#5905ad", "#0154c1"]}
-            angle={150}
-            noise={0}
-            blindCount={20}
-            blindMinWidth={70}
-            spotlightRadius={0.75}
-            spotlightSoftness={0.75}
-            spotlightOpacity={1}
-            mouseDampening={0.2}
-            distortAmount={10}
-            shineDirection="left"
-            mixBlendMode="lighten"
-          />
-        </div>
-      )}
       <Toaster />
-      {!hideNavBar && <NavBar />}
+      {!hideNavBar && (
+        <>
+          <NavBar />
+          <div className="fixed inset-0 -z-10">
+            <GradientBlinds
+              gradientColors={["#5905ad", "#0154c1"]}
+              angle={150}
+              noise={0}
+              blindCount={20}
+              blindMinWidth={70}
+              spotlightRadius={0.75}
+              spotlightSoftness={0.75}
+              spotlightOpacity={1}
+              mouseDampening={0.2}
+              distortAmount={10}
+              shineDirection="left"
+              mixBlendMode="lighten"
+            />
+          </div>
+        </>
+      )}
       <main className="flex-1">
         <Routes>
           <Route path={"/"} element={<Home />} />
