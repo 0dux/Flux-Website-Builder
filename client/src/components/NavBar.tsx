@@ -46,9 +46,9 @@ const NavBar = () => {
           <Link to={"/community"} className="hover:text-slate-300 transition">
             Community
           </Link>
-          <Link to={"/pricing"} className="hover:text-slate-300 transition">
+          {/* <Link to={"/pricing"} className="hover:text-slate-300 transition">
             Pricing
-          </Link>
+          </Link> */}
         </div>
 
         <div className="flex items-center gap-3">
