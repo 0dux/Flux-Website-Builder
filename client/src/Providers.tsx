@@ -10,6 +10,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       authClient={authClient}
       navigate={navigate}
       Link={(props) => <NavLink {...props} to={props.href} />}
+      social={{
+        providers: ["google"],
+      }}
+      baseURL="http://localhost:5173"
     >
       {children}
     </AuthUIProvider>
