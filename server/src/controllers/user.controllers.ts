@@ -89,7 +89,7 @@ export const createNewProject = async (req: Request, res: Response) => {
         })
 
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: "arcee-ai/trinity-large-preview:free",
+            model: "google/gemini-3-flash-preview",
             messages: [
                 {
                     role: "system",
@@ -132,7 +132,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         // Generate website code
 
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: "arcee-ai/trinity-large-preview:free",
+            model: "google/gemini-3-flash-preview",
             messages: [
                 {
                     "role": "system",

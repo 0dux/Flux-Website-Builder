@@ -63,7 +63,7 @@ export const makeRevisions = async (req: Request, res: Response) => {
         })
 
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: "arcee-ai/trinity-large-preview:free",
+            model: "google/gemini-3-flash-preview",
             messages: [
                 {
                     role: "system",
@@ -102,7 +102,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         })
 
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: "arcee-ai/trinity-large-preview:free",
+            model: "google/gemini-3-flash-preview",
             messages: [
                 {
                     role: "system",
