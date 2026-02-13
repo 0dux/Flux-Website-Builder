@@ -56,3 +56,4 @@ prisma/migrations/
 .netlify
 
 *-notes.md
+excluded/
