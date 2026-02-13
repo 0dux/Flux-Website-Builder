@@ -7,10 +7,10 @@
     "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
-
+    "declaration": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "generated/**/*.ts"],
+  "include": ["src/**/*.ts", "generated/**/*.ts", "api/**/*.ts"],
   "exclude": ["node_modules", "dist", "prisma.config.ts"]
 }
