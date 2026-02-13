@@ -4,7 +4,7 @@ import "dotenv/config";
 import express, { Request, Response } from 'express';
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-import env from "./config/env.js";
+import { default as env, default as envs } from "./config/env.js";
 import { auth } from "./lib/auth.js";
 import projectRouter from "./routes/project.routes.js";
 import userRouter from "./routes/user.routes.js";
@@ -40,6 +40,10 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+if (envs.NODE_ENV !== "PRODUCTION") {
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+    });
+}
+
+export default app;
