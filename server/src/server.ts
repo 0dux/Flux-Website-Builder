@@ -1,9 +1,7 @@
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import "dotenv/config";
-import express, { Request, Response } from 'express';
-import rateLimit from "express-rate-limit";
-import helmet from "helmet";
+import express, { Request, Response } from "express";
 import { default as env, default as envs } from "./config/env.js";
 import { auth } from "./lib/auth.js";
 import projectRouter from "./routes/project.routes.js";
@@ -13,37 +11,26 @@ const app = express();
 
 const port = env.PORT;
 
-app.use(helmet())
-app.use(express.json({ limit: "50mb" }))
-
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: { message: "Too many requests, please try again later" }
-});
-
-
-app.use(limiter)
+app.use(express.json({ limit: "50mb" }));
 
 const corsOptions = {
-    origin: env.TRUSTED_ORIGINS,
-    credentials: true
-}
-app.use(cors(corsOptions))
+  origin: env.TRUSTED_ORIGINS,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
-app.all('/api/auth/{*any}', toNodeHandler(auth));
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/project', projectRouter);
+app.all("/api/auth/{*any}", toNodeHandler(auth));
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/project", projectRouter);
 
-
-app.get('/', (req: Request, res: Response) => {
-    res.send('Server is Live!');
+app.get("/", (req: Request, res: Response) => {
+  res.send("Server is Live!");
 });
 
 if (envs.NODE_ENV !== "PRODUCTION") {
-    app.listen(port, () => {
-        console.log(`Server is running at http://localhost:${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+  });
 }
 
 export default app;
