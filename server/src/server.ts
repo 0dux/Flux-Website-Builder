@@ -2,7 +2,6 @@ import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import "dotenv/config";
 import express, { Request, Response } from 'express';
-import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import envs from "./config/env.js";
 import { auth } from "./lib/auth.js";
@@ -25,15 +24,6 @@ app.use(cors(corsOptions))
 
 // Auth routes BEFORE rate limiting
 app.all('/api/auth/{*any}', toNodeHandler(auth));
-
-// Rate limiting for API routes only
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: { message: "Too many requests, please try again later" }
-});
-
-app.use('/api/v1', limiter) // Apply only to /api/v1 routes
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/project', projectRouter);
