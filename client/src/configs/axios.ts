@@ -1,8 +1,13 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL || "http://localhost:3000",
-    withCredentials: true
-})
+const isDev = import.meta.env.DEV;
 
-export default api
+const api = axios.create({
+  // In production, use relative URL so requests go through the Vercel proxy
+  baseURL: isDev
+    ? import.meta.env.VITE_BASE_URL || "http://localhost:3000"
+    : "",
+  withCredentials: true,
+});
+
+export default api;
