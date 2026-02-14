@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "tsx ./src/server.ts",
     "server": "nodemon --exec tsx ./src/server.ts",
-    "build": "tsc"
+    "start": "node ./dist/server.js",
+    "build": "tsc && prisma generate"
   },
   "keywords": [],
   "author": "",
