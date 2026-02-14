@@ -4,7 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-
+  const isDev = import.meta.env.DEV;
+  
   return (
     <AuthUIProvider
       authClient={authClient}
@@ -13,7 +14,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
       social={{
         providers: ["google"],
       }}
-      baseURL={import.meta.env.VITE_REDIRECT_URL}
+      baseURL={
+        isDev
+          ? import.meta.env.VITE_REDIRECT_URL || "http://localhost:5173"
+          : window.location.origin
+      }
     >
       {children}
     </AuthUIProvider>
