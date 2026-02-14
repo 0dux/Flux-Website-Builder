@@ -15,6 +15,9 @@ export const auth = betterAuth({
             enabled: true,
         }
     },
+    account: {
+        skipStateCookieCheck: true
+    },
     baseURL: envs.BETTER_AUTH_URL,
     trustedOrigins: [envs.TRUSTED_ORIGIN, envs.BETTER_AUTH_URL],
     socialProviders: {
