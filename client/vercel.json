@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/auth/:path*",
-      "destination": "https://flux-website-builder.onrender.com/api/auth/:path*"
+      "source": "/api/:path*",
+      "destination": "https://flux-website-builder.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
