@@ -17,7 +17,7 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
         })
 
         if (!session || !session.user) {
-            res.status(401).json({
+            return res.status(401).json({
                 message: "Unauthorized user"
             })
         }
