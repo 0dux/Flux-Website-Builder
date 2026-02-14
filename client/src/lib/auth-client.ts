@@ -1,6 +1,6 @@
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
 
-const isDev = import.meta.env.isDev;
+const isDev = import.meta.env.DEV;
 
 export const authClient = createAuthClient({
     baseURL: isDev
