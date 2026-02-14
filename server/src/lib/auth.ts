@@ -21,7 +21,7 @@ export const auth = betterAuth({
         google: {
             clientId: envs.GOOGLE_CLIENT_ID,
             clientSecret: envs.GOOGLE_CLIENT_SECRET,
-            redirectURI: `${envs.BETTER_AUTH_URL}api/auth/callback/google`
+            redirectURI: `${envs.BETTER_AUTH_URL}/api/auth/callback/google`
         }
     },
     secret: envs.BETTER_AUTH_SECRET,
