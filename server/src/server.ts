@@ -26,7 +26,7 @@ const limiter = rateLimit({
 app.use(limiter)
 
 const corsOptions = {
-    origin: env.TRUSTED_ORIGINS,
+    origin: env.TRUSTED_ORIGIN,
     credentials: true
 }
 app.use(cors(corsOptions))

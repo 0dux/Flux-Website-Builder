@@ -15,12 +15,13 @@ export const auth = betterAuth({
             enabled: true,
         }
     },
-    trustedOrigins: envs.TRUSTED_ORIGINS,
     baseURL: envs.BETTER_AUTH_URL,
+    trustedOrigins: [envs.TRUSTED_ORIGIN],
     socialProviders: {
         google: {
             clientId: envs.GOOGLE_CLIENT_ID,
-            clientSecret: envs.GOOGLE_CLIENT_SECRET
+            clientSecret: envs.GOOGLE_CLIENT_SECRET,
+            redirectURI: `${envs.BETTER_AUTH_URL}api/auth/callback/google`
         }
     },
     secret: envs.BETTER_AUTH_SECRET,

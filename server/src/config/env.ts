@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const envSchema = z.object({
     PORT: z.string().optional(),
-    TRUSTED_ORIGINS: z.string().optional(),
+    TRUSTED_ORIGIN: z.string(),
     DATABASE_URL: z.string(),
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string(),
@@ -15,7 +15,7 @@ const envSchema = z.object({
 
 let envs: {
     PORT: number;
-    TRUSTED_ORIGINS: string[];
+    TRUSTED_ORIGIN: string;
     DATABASE_URL: string;
     BETTER_AUTH_SECRET: string;
     BETTER_AUTH_URL: string;
@@ -30,9 +30,6 @@ try {
 
     // Transform and validate values
     const port = parsedEnv.PORT ? parseInt(parsedEnv.PORT, 10) : 3000;
-    const trustedOrigins = parsedEnv.TRUSTED_ORIGINS
-        ? parsedEnv.TRUSTED_ORIGINS.split(',').map(origin => origin.trim())
-        : ['http://localhost:3000'];
 
     // Validate port is a positive number
     if (isNaN(port) || port <= 0) {
@@ -41,7 +38,7 @@ try {
 
     envs = {
         PORT: port,
-        TRUSTED_ORIGINS: trustedOrigins,
+        TRUSTED_ORIGIN: parsedEnv.TRUSTED_ORIGIN,
         DATABASE_URL: parsedEnv.DATABASE_URL,
         BETTER_AUTH_SECRET: parsedEnv.BETTER_AUTH_SECRET,
         BETTER_AUTH_URL: parsedEnv.BETTER_AUTH_URL,
