@@ -25,6 +25,9 @@ export const auth = betterAuth({
         }
     },
     secret: envs.BETTER_AUTH_SECRET,
+    logger: {
+        level: "debug"
+    },
     advanced: {
         cookies: {
             session_token: {
@@ -32,7 +35,7 @@ export const auth = betterAuth({
                 attributes: {
                     httpOnly: true,
                     secure: envs.NODE_ENV === "PRODUCTION",
-                    sameSite: envs.NODE_ENV === "PRODUCTION" ? "none" : "Lax",
+                    sameSite: envs.NODE_ENV === "PRODUCTION" ? "none" : "lax",
                     path: "/"
                 }
             }
