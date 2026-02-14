@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon --exec tsx ./src/server.ts",
     "start": "node ./dist/server.js",
-    "build": "tsc && prisma generate"
+    "build": "prisma generate && tsc"
   },
   "keywords": [],
   "author": "",
