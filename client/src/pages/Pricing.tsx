@@ -13,7 +13,7 @@ interface Plan {
 const Pricing = () => {
   const [plans] = useState<Plan[]>(appPlans);
 
-  const handlePurchase = async (planId: string) => {};
+  const handlePurchase = async () => {};
 
   return (
     <>
@@ -67,7 +67,7 @@ const Pricing = () => {
                   ))}
                 </ul>
                 <button
-                  onClick={() => handlePurchase(plan.id)}
+                  onClick={() => handlePurchase()}
                   className="w-full py-2 px-4 bg-indigo-500 hover:bg-indigo-600 active:scale-95 text-sm rounded-md transition-all"
                 >
                   Buy Now
