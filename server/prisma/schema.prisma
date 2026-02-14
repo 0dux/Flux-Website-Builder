@@ -39,7 +39,7 @@ model WebsiteProject {
   current_code          String?
   current_version_index String  @default("")
   userId                String
-  isPublished           Boolean @default(false)
+  isPublished           Boolean @default(true)
 
   // Relations
   conversation Conversation[]
