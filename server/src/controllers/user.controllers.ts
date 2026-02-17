@@ -123,7 +123,10 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         promptEnhanceResponse?.choices?.[0]?.message?.content;
 
       if (!enhancedPrompt) {
-        console.error("error:: Prompt enhancement returned no content");
+        console.error(
+          "error:: Prompt enhancement returned no content. Full API response:",
+          JSON.stringify(promptEnhanceResponse, null, 2),
+        );
         await prisma.user.update({
           where: { id: userId },
           data: { credits: { increment: 5 } },
@@ -131,8 +134,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         await prisma.conversation.create({
           data: {
             role: "assistant",
-            content:
-              "Some error occurred during prompt enhancement. Your deducted credits have been refunded.",
+            content: `Prompt enhancement failed. API returned empty response. Details: ${JSON.stringify((promptEnhanceResponse as any)?.error || promptEnhanceResponse?.choices || "No response data")}. Your deducted credits have been refunded.`,
             projectId: project.id,
           },
         });
@@ -198,6 +200,10 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
       const code = codeGenerationResponse?.choices?.[0]?.message?.content || "";
 
       if (!code) {
+        console.error(
+          "error:: Code generation returned no content. Full API response:",
+          JSON.stringify(codeGenerationResponse, null, 2),
+        );
         await prisma.user.update({
           where: { id: userId },
           data: { credits: { increment: 5 } },
@@ -205,8 +211,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         await prisma.conversation.create({
           data: {
             role: "assistant",
-            content:
-              "Some error has occured during project generation. Your deducted credits have been refunded.",
+            content: `Code generation failed. API returned empty response. Details: ${JSON.stringify((codeGenerationResponse as any)?.error || codeGenerationResponse?.choices || "No response data")}. Your deducted credits have been refunded.`,
             projectId: project.id,
           },
         });
@@ -247,7 +252,12 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
     } catch (bgError: any) {
       // This catch handles errors that occur AFTER the response was already sent.
       // We only log and refund credits — we do NOT try to send another HTTP response.
-      console.error("Background processing error:: ", bgError.message);
+      console.error(
+        "Background processing error:: ",
+        bgError.message,
+        "\nFull error:",
+        bgError,
+      );
       try {
         await prisma.user.update({
           where: { id: userId },
@@ -256,8 +266,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         await prisma.conversation.create({
           data: {
             role: "assistant",
-            content:
-              "An error occurred while generating your website. Your credits have been refunded.",
+            content: `Error during website generation: ${bgError.message || "Unknown error"}. Your credits have been refunded.`,
             projectId: project.id,
           },
         });

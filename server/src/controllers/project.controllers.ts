@@ -88,12 +88,16 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
       promptEnhanceResponse?.choices?.[0]?.message?.content;
 
     if (!enhancedPrompt) {
+      console.error(
+        "error:: Prompt enhancement returned no content. Full API response:",
+        JSON.stringify(promptEnhanceResponse, null, 2),
+      );
       await prisma.user.update({
         where: { id: userId },
         data: { credits: { increment: 5 } },
       });
       return res.status(500).json({
-        message: "Prompt enhancement failed. Credits have been refunded.",
+        message: `Prompt enhancement failed. API returned empty response. Details: ${JSON.stringify((promptEnhanceResponse as any)?.error || promptEnhanceResponse?.choices || "No response data")}. Credits have been refunded.`,
       });
     }
 
@@ -140,6 +144,10 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
     const code = codeGenerationResponse?.choices?.[0]?.message?.content || "";
 
     if (!code) {
+      console.error(
+        "error:: Code generation returned no content. Full API response:",
+        JSON.stringify(codeGenerationResponse, null, 2),
+      );
       await prisma.user.update({
         where: { id: userId },
         data: { credits: { increment: 5 } },
@@ -147,13 +155,12 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
       await prisma.conversation.create({
         data: {
           role: "assistant",
-          content:
-            "Some error has occured during project generation. Your deducted credits have been refunded.",
+          content: `Code generation failed. API returned empty response. Details: ${JSON.stringify((codeGenerationResponse as any)?.error || codeGenerationResponse?.choices || "No response data")}. Your deducted credits have been refunded.`,
           projectId,
         },
       });
       return res.status(403).json({
-        message: "Code was not generated api rate limit.",
+        message: `Code generation failed. Details: ${JSON.stringify((codeGenerationResponse as any)?.error || "Empty response")}`,
       });
     }
 
@@ -198,7 +205,12 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         },
       });
     }
-    console.error("error:: ", error.message);
+    console.error(
+      "makeRevisions error:: ",
+      error.message,
+      "\nFull error:",
+      error,
+    );
     return res.status(500).json({
       message: error.message,
     });
