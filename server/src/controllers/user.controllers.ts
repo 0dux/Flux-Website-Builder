@@ -116,6 +116,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             content: initial_prompt,
           },
         ],
+        max_tokens: 500,
       });
 
       // Safely access choices to prevent "Cannot read properties of undefined (reading '0')"
@@ -194,6 +195,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             content: enhancedPrompt || "",
           },
         ],
+        max_tokens: 12000,
       });
 
       // Safely access choices here too
