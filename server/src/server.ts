@@ -28,6 +28,10 @@ app.all("/api/auth/{*any}", toNodeHandler(auth));
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/project", projectRouter);
 
+app.get("/api/health", (_req: Request, res: Response) => {
+  res.json({ status: "ok" });
+});
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Server is Live!");
 });

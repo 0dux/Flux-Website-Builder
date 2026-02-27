@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import Footer from "./components/Footer";
 import GradientBlinds from "./components/GradientBlinds";
 import NavBar from "./components/NavBar";
+import { useHealthCheck } from "./hooks/useHealthCheck";
 import AuthPage from "./pages/auth/AuthPage";
 import Community from "./pages/Community";
 import Home from "./pages/Home";
@@ -15,6 +16,7 @@ import View from "./pages/View";
 
 const App = () => {
   const { pathname } = useLocation();
+  useHealthCheck();
   const hideNavBar =
     (pathname.startsWith("/projects/") && pathname !== "/projects") ||
     pathname.startsWith("/view/") ||
