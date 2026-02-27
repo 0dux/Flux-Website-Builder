@@ -8,6 +8,12 @@ Build, iterate, and deploy websites through simple prompts powered by AI
 
 [Features](#features) • [Tech Stack](#tech-stack) • [Getting Started](#getting-started) • [Usage](#usage) • [Documentation](#documentation)
 
+<br/>
+
+<!-- Replace './demo.gif' with the actual path to your GIF once you have it -->
+
+![FLUX Demo](./demo.gif)
+
 </div>
 
 ---
