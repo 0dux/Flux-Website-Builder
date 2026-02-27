@@ -110,7 +110,7 @@ const Home = () => {
           <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700 shadow-lg shadow-indigo-500/10">
             <iframe
               className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1"
+              src="https://www.youtube.com/embed/YHdVngPlj1g?rel=0&modestbranding=1"
               title="Flux Demo Video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
