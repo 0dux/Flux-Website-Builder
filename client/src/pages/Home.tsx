@@ -101,6 +101,22 @@ const Home = () => {
             )}
           </button>
         </form>
+
+        {/* Demo Video Section */}
+        <div className="mt-16 w-full max-w-3xl text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+            See Flux in Action
+          </h2>
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700 shadow-lg shadow-indigo-500/10">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1"
+              title="Flux Demo Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
       </section>
     </>
   );
