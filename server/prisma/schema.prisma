@@ -28,7 +28,6 @@ model User {
   projects WebsiteProject[]
   sessions      Session[]
   accounts      Account[]
-  transactions Transaction[]
 
   @@map("user")
 }
@@ -78,19 +77,6 @@ model Version {
   project WebsiteProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
-model Transaction {
-  id        String   @id @default(uuid())
-  isPaid    Boolean  @default(false)
-  planId    String
-  amount    Float
-  credits   Int
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 
 model Session {
   id        String   @id
