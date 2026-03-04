@@ -4,12 +4,12 @@ import protect from "../middleware/auth.js";
 
 const projectRouter = Router();
 
-projectRouter.post("/revision/:projectId", protect, makeRevisions);
-projectRouter.put("/save/:projectId", protect, saveProjectCode);
-projectRouter.get("/rollback/:projectId/:versionId", protect, rollBackToVersion);
-projectRouter.delete("/:projectId", protect, deleteProject);
-projectRouter.get("/preview/:projectId", protect, getProjectPreview);
 projectRouter.get("/published", getPublishedProjects);
 projectRouter.get("/published/:projectId", getProjectById);
+projectRouter.post("/revision/:projectId", protect, makeRevisions);
+projectRouter.put("/save/:projectId", protect, saveProjectCode);
+projectRouter.put("/rollback/:projectId/:versionId", protect, rollBackToVersion);
+projectRouter.delete("/:projectId", protect, deleteProject);
+projectRouter.get("/preview/:projectId", protect, getProjectPreview);
 
 export default projectRouter;
