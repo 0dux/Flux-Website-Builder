@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import openai from "../config/openai.js";
 import { prisma } from "../lib/prisma.js";
 
-// Credits
+// fetch user credits
 export const getUserCredits = async (req: Request, res: Response) => {
   try {
     const userId = req.userId;
@@ -50,7 +50,7 @@ export const createNewProject = async (req: Request, res: Response) => {
       });
     }
 
-    // create new project
+    // project creation initiated
 
     const project = await prisma.websiteProject.create({
       data: {
@@ -280,12 +280,10 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
     // This catch only handles errors that occur BEFORE res.json() is called
     // (e.g., project creation fails, credit check fails, etc.)
     if (userId) {
-      try {
-        await prisma.user.update({
-          where: { id: userId },
-          data: { credits: { increment: 5 } },
-        });
-      } catch (_) {}
+      await prisma.user.update({
+        where: { id: userId },
+        data: { credits: { increment: 5 } },
+      });
     }
     console.error("error:: ", error.message);
     return res.status(500).json({
@@ -401,6 +399,3 @@ export const togglePublish = async (req: Request, res: Response) => {
     });
   }
 };
-
-// purchase credits
-export const purchaseCredits = async (req: Request, res: Response) => {};
