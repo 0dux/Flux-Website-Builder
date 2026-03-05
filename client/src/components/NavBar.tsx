@@ -46,9 +46,6 @@ const NavBar = () => {
           <Link to={"/community"} className="hover:text-slate-300 transition">
             Community
           </Link>
-          <Link to={"/pricing"} className="hover:text-slate-300 transition">
-            Pricing
-          </Link>
         </div>
 
         <div className="flex items-center gap-3">
@@ -106,9 +103,7 @@ const NavBar = () => {
           <Link to={"/community"} className="hover:text-slate-300 transition">
             Community
           </Link>
-          <Link to={"/pricing"} className="hover:text-slate-300 transition">
-            Pricing
-          </Link>
+
           <button
             className="active:ring-3 active:ring-white aspect-square size-10 p-1 items-center justify-center bg-slate-100 hover:bg-slate-200 transition text-black rounded-md flex"
             onClick={() => setMenuOpen(false)}
