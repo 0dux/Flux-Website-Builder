@@ -17,6 +17,7 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [visible, setVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 
@@ -49,6 +50,8 @@ const NavBar = () => {
       requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
         const diff = currentScrollY - lastScrollY.current;
+
+        setScrolled(currentScrollY > 20);
 
         if (currentScrollY < 10) {
           // Always show at the very top
@@ -92,7 +95,7 @@ const NavBar = () => {
           duration: 0.35,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className="z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur-md border-b text-foreground border-border/10"
+        className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 border-b text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md border-border/10" : "border-transparent"}`}
       >
         <Link to="/">
           <motion.img

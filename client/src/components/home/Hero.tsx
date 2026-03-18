@@ -1,5 +1,5 @@
 import { authClient } from "@/lib/auth-client";
-import { Layers } from "lucide-react";
+import { Layers, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +27,19 @@ const Hero = () => {
 
   return (
     <section className="relative flex flex-col items-center justify-center text-foreground px-4 overflow-hidden min-h-[92vh]">
+      {/* White Sphere Grid Background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "white",
+          backgroundImage: `
+       linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px),
+       linear-gradient(to bottom, rgba(71,85,105,0.3) 1px, transparent 1px),
+       radial-gradient(circle at 50% 50%, rgba(139,92,246,0.25) 0%, rgba(139,92,246,0.1) 40%, transparent 80%)
+     `,
+          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
+        }}
+      />
       {/* Background: teal glow from bottom */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -65,16 +78,31 @@ const Hero = () => {
           instantly. Go from prompt to live site in minutes, not hours.
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.div {...fadeUp(0.41)}>
+        {/* CTA Buttons */}
+        <motion.div
+          {...fadeUp(0.41)}
+          className="flex flex-col sm:flex-row items-center gap-4"
+        >
           <motion.button
             onClick={handleCTA}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 380, damping: 22 }}
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-colors duration-200"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-colors duration-200 w-full sm:w-auto"
           >
             Start for free
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            className="group flex items-center gap-2 bg-card/40 backdrop-blur-md border border-border/10 hover:border-border/20 text-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-all duration-200 w-full sm:w-auto"
+          >
+            <Play
+              size={14}
+              className="fill-foreground/10 group-hover:fill-accent group-hover:text-accent transition-colors duration-200"
+            />
+            Watch a demo
           </motion.button>
         </motion.div>
       </div>
