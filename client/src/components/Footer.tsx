@@ -11,14 +11,16 @@ const Footer = () => {
 
         <div className="flex items-center gap-3">
           <a
-            href="#"
+            href="https://github.com/0dux"
+            target="_blank"
             aria-label="GitHub"
             className="border border-border bg-background p-2 text-foreground shadow-sm active:shadow-none transition-colors duration-200 hover:bg-muted"
           >
             <Github size={18} />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/dakshyadav0"
+            target="_blank"
             aria-label="LinkedIn"
             className="border border-border bg-background p-2 text-foreground shadow-sm active:shadow-none transition-colors duration-200 hover:bg-muted"
           >

@@ -124,12 +124,12 @@ const NavBar = () => {
         }}
         className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-3 px-4 md:px-16 lg:px-24 xl:px-32 border-b   border-2 text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md" : ""}`}
       >
-        <Link to="/">
+        <Link to="/" className="flex items-center">
           <motion.img
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="h-4 sm:h-8"
+            className="h-4 w-auto origin-left scale-165 object-contain sm:h-8"
             src={assets.logo}
             alt="Flux Logo"
           />

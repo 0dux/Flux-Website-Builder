@@ -6,28 +6,28 @@ import {
 
 export default function SettingsPage() {
   return (
-    <div className="flex flex-col w-full items-center justify-center py-12 px-4 gap-6 min-h-[90vh]">
+    <div className="flex min-h-[90vh] w-full flex-col items-center justify-center gap-6 bg-background px-4 py-12">
       <AccountSettingsCards
         className="max-w-xl"
         classNames={{
           card: {
-            base: "bg-black ring ring-indigo-900",
-            footer: "bg-zinc-900",
+            base: "border border-border bg-card text-card-foreground shadow-md ring-0",
+            footer: "border-t border-border bg-muted",
           },
         }}
       />
       <div className="w-full">
         <ChangePasswordCard
           classNames={{
-            base: "bg-black ring ring-indigo-900 max-w-xl mx-auto",
-            footer: "bg-zinc-900",
+            base: "mx-auto max-w-xl border border-border bg-card text-card-foreground shadow-md ring-0",
+            footer: "border-t border-border bg-muted",
           }}
         />
       </div>
       <div className="w-full">
         <DeleteAccountCard
           classNames={{
-            base: "bg-black ring ring-red-900 max-w-xl mx-auto",
+            base: "mx-auto max-w-xl border border-border bg-card text-card-foreground shadow-md ring-0",
           }}
         />
       </div>

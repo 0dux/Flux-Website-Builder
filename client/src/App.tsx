@@ -26,7 +26,7 @@ const App = () => {
           <NavBar />
         </>
       )}
-      <main className="flex-1 pt-16">
+      <main className={`flex-1 ${hideNavBar ? "pt-0" : "pt-16"}`}>
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/projects/:projectId"} element={<Projects />} />
