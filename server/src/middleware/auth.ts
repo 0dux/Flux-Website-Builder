@@ -2,6 +2,8 @@ import { fromNodeHeaders } from "better-auth/node";
 import { NextFunction, Request, Response } from "express";
 import { auth } from "../lib/auth.js";
 
+const INTERNAL_ERROR_MESSAGE = "Something went wrong. Please try again.";
+
 declare global {
     namespace Express {
         interface Request {
@@ -27,7 +29,7 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
     } catch (error: any) {
         console.error("error:: ", error.message);
         return res.status(500).json({
-            message: error.message
+            message: INTERNAL_ERROR_MESSAGE
         })
     }
 }

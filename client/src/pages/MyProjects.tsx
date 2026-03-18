@@ -51,25 +51,37 @@ const MyProjects = () => {
   // console.log(project);
   return (
     <>
-      <div className="px-4 md:px-16 lg:px-24 xl:px-32">
+      <div className="bg-background px-4 md:px-16 lg:px-24 xl:px-32 relative min-h-[92vh]">
+        {/* Zigzag Lightning - Light Pattern */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+        repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(75, 85, 99, 0.08) 20px, rgba(75, 85, 99, 0.08) 21px),
+        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(107, 114, 128, 0.06) 30px, rgba(107, 114, 128, 0.06) 31px),
+        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(55, 65, 81, 0.05) 40px, rgba(55, 65, 81, 0.05) 41px),
+        repeating-linear-gradient(150deg, transparent, transparent 35px, rgba(31, 41, 55, 0.04) 35px, rgba(31, 41, 55, 0.04) 36px)
+      `,
+          }}
+        />
         {isLoading ? (
           //When its loading
-          <div className="flex items-center justify-center h-[80vh]">
-            <Loader2 className="animate-spin size-8 text-indigo-200" />
+          <div className="flex h-[80vh] items-center justify-center">
+            <Loader2 className="size-8 animate-spin text-accent" />
           </div>
         ) : projects.length > 0 ? (
           //When project length > 0 and loading === false
           <div className="min-h-[80vh] py-10">
             {/* top bar */}
-            <div className="flex items-center justify-between mb-12">
-              <h1 className="text-2xl text-zinc-100 font-medium">
+            <div className="flex items-center justify-between mb-12 relative">
+              <h1 className="text-2xl font-medium text-foreground">
                 My Projects
               </h1>
               <button
                 onClick={() => {
                   navigate("/");
                 }}
-                className="flex items-center gap-2 text-xl font-medium text-zinc-100 px-2 sm:px-6 py-1 sm:py-2 bg-linear-to-br from-indigo-500 to-indigo-700 rounded hover:opacity-90 transition-all active:scale-95"
+                className="flex items-center gap-2 border border-border bg-accent px-3 py-2 text-sm font-medium text-accent-foreground shadow-sm active:shadow-none transition-colors hover:bg-accent/90 sm:px-6"
               >
                 <PlusIcon size={18} /> Create New
               </button>
@@ -80,9 +92,9 @@ const MyProjects = () => {
                 <div
                   onClick={() => navigate(`/projects/${project.id}`)}
                   key={project.id}
-                  className="relative group w-72 max-sm:mx-auto cursor-pointer bg-black border border-zinc-700 rounded-lg overflow-hidden shadow-md group-hover:shadow-indigo-700/30 hover:border-indigo-800/80 transition-all duration-300"
+                  className="group relative w-72 cursor-pointer overflow-hidden border border-border bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg max-sm:mx-auto"
                 >
-                  <div className="relative bg-zinc-900 w-full h-40 overflow-hidden border-b border-zinc-800">
+                  <div className="relative h-40 w-full overflow-hidden border-b border-border bg-muted">
                     {project.current_code ? (
                       <iframe
                         srcDoc={project.current_code}
@@ -91,41 +103,41 @@ const MyProjects = () => {
                         style={{ transform: "scale(0.25)" }}
                       />
                     ) : (
-                      <div className="flex items-center justify-center h-full text-zinc-500">
+                      <div className="flex h-full items-center justify-center text-muted-foreground">
                         No Preview
                       </div>
                     )}
                   </div>
                   {/* Content */}
-                  <div className="p-4 text-zinc-100 bg-linear-180 from-transparent group-hover:from-indigo-950 to-transparent transition-colors">
+                  <div className="p-4 text-foreground">
                     <div className="flex items-start justify-between">
                       <h1 className="text-lg font-medium line-clamp-2">
                         {project.name}
                       </h1>
-                      <button className="px-2 py-1 mt-1 ml-2 text-xs bg-zinc-800 border border-zinc-700 rounded-full">
+                      <button className="ml-2 mt-1 border border-border bg-background px-2 py-1 text-xs text-muted-foreground shadow-sm active:shadow-none">
                         Website
                       </button>
                     </div>
-                    <p className="text-zinc-400 text-sm line-clamp-2">
+                    <p className="text-sm text-muted-foreground line-clamp-2">
                       {project.initial_prompt}
                     </p>
                     <div
                       onClick={(e) => e.stopPropagation()}
                       className="flex items-center justify-between mt-6"
                     >
-                      <span className="text-xs text-zinc-500">
+                      <span className="text-xs text-muted-foreground">
                         {new Date(project.createdAt).toLocaleDateString()}
                       </span>
-                      <div className="text-zinc-100 text-sm flex gap-3">
+                      <div className="flex gap-3 text-sm text-foreground">
                         <button
                           onClick={() => navigate(`/preview/${project.id}`)}
-                          className="px-2 py-1 bg-white/10 hover:bg-white/15 rounded-md transition-all"
+                          className="border border-border bg-secondary px-2 py-1 text-secondary-foreground shadow-sm active:shadow-none transition-colors hover:bg-secondary/90"
                         >
                           Preview
                         </button>
                         <button
                           onClick={() => navigate(`/projects/${project.id}`)}
-                          className="px-2 py-1 bg-white/10 hover:bg-white/15 rounded-md transition-all"
+                          className="border border-border bg-accent px-2 py-1 text-accent-foreground shadow-sm active:shadow-none transition-colors hover:bg-accent/90"
                         >
                           Open
                         </button>
@@ -141,7 +153,7 @@ const MyProjects = () => {
                       onClick={() => {
                         deleteProject(project.id);
                       }}
-                      className="absolute top-3 right-3 scale-0 group-hover:scale-100 bg-white p-1.5 size-8 rounded text-red-500 text-xl cursor-pointer transition-all"
+                      className="absolute right-3 top-3 size-8 scale-0 cursor-pointer border border-border bg-destructive p-1.5 text-destructive-foreground shadow-sm transition-all group-hover:scale-100"
                     />
                   </div>
                 </div>
@@ -151,14 +163,14 @@ const MyProjects = () => {
         ) : (
           //When project length === 0
           <div className="flex flex-col items-center justify-center gap-8 h-[80vh]">
-            <h1 className="text-3xl text-zinc-300 font-semibold">
+            <h1 className="text-3xl font-semibold text-muted-foreground">
               You have no projects yet!
             </h1>
             <button
               onClick={() => {
                 navigate("/");
               }}
-              className="flex items-center gap-2 text-xl font-medium text-zinc-100 px-2 sm:px-6 py-1 sm:py-2 bg-linear-to-br from-indigo-500 to-indigo-700 rounded hover:opacity-90 transition-all active:scale-95"
+              className="flex items-center gap-2 border border-border bg-accent px-3 py-2 text-sm font-medium text-accent-foreground shadow-sm active:shadow-none transition-colors hover:bg-accent/90 sm:px-6"
             >
               <PlusIcon size={18} /> Create New
             </button>

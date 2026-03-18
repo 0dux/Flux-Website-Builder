@@ -47,81 +47,81 @@ const EditorPanel = ({
   }, [selectedElemet]);
 
   return (
-    <div className="absolute top-4 right-4 w-80 bg-white rounded-lg shadow-xl border border-zinc-200 p-4 z-50 animate-fade-in fade-in">
+    <div className="fade-in animate-fade-in absolute top-4 right-4 z-50 w-80 border border-border bg-card p-4 text-card-foreground shadow-lg">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="font-semibold text-zinc-800">Edit Element</h3>
+        <h3 className="font-semibold text-foreground">Edit Element</h3>
         <button
           onClick={onClose}
-          className="p-1 hover:bg-zinc-100 rounded-full"
+          className="border border-border bg-background p-1 text-muted-foreground shadow-sm active:shadow-none transition-colors hover:bg-muted"
         >
-          <X className="w-4 h-4 text-zinc-500" />
+          <X className="h-4 w-4" />
         </button>
       </div>
-      <div className="space-y-4 text-black">
+      <div className="space-y-4 text-foreground">
         <div>
-          <label className="block text-xs font-medium text-zinc-500 mb-1">
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">
             Text Content
           </label>
           <textarea
             value={values.text}
-            className="w-full text-sm p-2 border border-zinc-400 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none min-h-20"
+            className="min-h-20 w-full border border-border bg-background p-2 text-sm outline-none focus:ring-2 focus:ring-ring"
             onChange={(e) => handleChange("text", e.target.value)}
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-zinc-500 mb-1">
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">
             Class Name
           </label>
           <input
             type="text"
             value={values.className || ""}
-            className="w-full text-sm p-2 border border-zinc-400 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none"
+            className="w-full border border-border bg-background p-2 text-sm outline-none focus:ring-2 focus:ring-ring"
             onChange={(e) => handleChange("className", e.target.value)}
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1">
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
               Padding
             </label>
             <input
               type="text"
               value={values.styles.padding}
-              className="w-full text-sm p-2 border border-zinc-400 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full border border-border bg-background p-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               onChange={(e) => handleStyleChange("padding", e.target.value)}
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1">
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
               Margin
             </label>
             <input
               type="text"
               value={values.styles.margin}
-              className="w-full text-sm p-2 border border-zinc-400 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full border border-border bg-background p-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               onChange={(e) => handleStyleChange("margin ", e.target.value)}
             />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1">
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
               Font Size
             </label>
             <input
               type="text"
               value={values.styles.fontSize}
-              className="w-full text-sm p-2 border border-zinc-400 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full border border-border bg-background p-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               onChange={(e) => handleStyleChange("fontSize", e.target.value)}
             />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1">
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
               Background
             </label>
-            <div className="flex items-center gap-2 border border-zinc-400 rounded-md p-1">
+            <div className="flex items-center gap-2 border border-border bg-background p-1">
               <input
                 type="color"
                 value={
@@ -134,23 +134,23 @@ const EditorPanel = ({
                   handleStyleChange("backgroundColor", e.target.value)
                 }
               />
-              <span className="text-xs text-zinc-600 truncate">
+              <span className="truncate text-xs text-muted-foreground">
                 {values.styles.backgroundColor}
               </span>
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1">
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
               Text Color
             </label>
-            <div className="flex items-center gap-2 border border-zinc-400 rounded-md p-1">
+            <div className="flex items-center gap-2 border border-border bg-background p-1">
               <input
                 type="color"
                 value={values.styles.color}
                 className="w-6 h-6 cursor-pointer"
                 onChange={(e) => handleStyleChange("color", e.target.value)}
               />
-              <span className="text-xs text-zinc-600 truncate">
+              <span className="truncate text-xs text-muted-foreground">
                 {values.styles.color}
               </span>
             </div>

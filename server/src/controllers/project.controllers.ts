@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import openai from "../config/openai.js";
 import { prisma } from "../lib/prisma.js";
 
+const INTERNAL_ERROR_MESSAGE = "Something went wrong. Please try again.";
+const REVISION_FAILURE_MESSAGE =
+  "We couldn't process your request right now. Please try again.";
+
 export const makeRevisions = async (req: Request, res: Response) => {
   const userId = req.userId;
   try {
@@ -98,7 +102,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         data: { credits: { increment: 5 } },
       });
       return res.status(500).json({
-        message: `Prompt enhancement failed. API returned empty response. Details: ${JSON.stringify((promptEnhanceResponse as any)?.error || promptEnhanceResponse?.choices || "No response data")}. Credits have been refunded.`,
+        message: REVISION_FAILURE_MESSAGE,
       });
     }
 
@@ -162,7 +166,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
         },
       });
       return res.status(403).json({
-        message: `Code generation failed. Details: ${JSON.stringify((codeGenerationResponse as any)?.error || "Empty response")}`,
+        message: REVISION_FAILURE_MESSAGE,
       });
     }
 
@@ -214,7 +218,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
       error,
     );
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -285,7 +289,7 @@ export const rollBackToVersion = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -317,7 +321,7 @@ export const deleteProject = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -356,7 +360,7 @@ export const getProjectPreview = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -374,7 +378,7 @@ export const getPublishedProjects = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -403,7 +407,7 @@ export const getProjectById = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -454,7 +458,7 @@ export const saveProjectCode = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error.message || error.code);
     res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };

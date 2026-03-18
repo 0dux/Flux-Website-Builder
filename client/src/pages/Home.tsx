@@ -1,124 +1,31 @@
-import api from "@/configs/axios";
-import { authClient } from "@/lib/auth-client";
-import { Loader } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import CTA from "@/components/home/CTA";
+import Footer from "@/components/Footer";
+import Demo from "@/components/home/Demo";
+import Features from "@/components/home/Features";
+import Hero from "@/components/home/Hero";
 
 const Home = () => {
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { data: session } = authClient.useSession();
-  const navigate = useNavigate();
-
-  const onSubmitHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // console.log("Session:", session);
-
-    try {
-      if (!session?.user) {
-        return toast.error("Please sign in to create a project");
-      }
-      if (!input.trim()) {
-        return toast.error("Please enter a message");
-      }
-      setIsLoading(true);
-      const { data } = await api.post("/api/v1/user/project", {
-        initial_prompt: input,
-      });
-      setIsLoading(false);
-      // console.log("Data Obj:", data);
-
-      navigate(`/projects/${data.projectId}`);
-    } catch (error: any) {
-      setIsLoading(false);
-      toast.error(error?.response?.data?.message || error.message);
-      console.error(error.message);
-    }
-  };
-
   return (
-    <>
-      <section className="flex flex-col items-center text-white text-sm pb-20 px-4 font-poppins">
-        <div className="flex bg-black/80 items-center gap-2 border border-slate-700 rounded-full p-1 pr-3 text-sm mt-20">
-          <span className="bg-indigo-600 text-xs px-3 py-1 rounded-full">
-            NEW
-          </span>
-          <p className="flex items-center gap-2">
-            <span>Launch your first site in minutes</span>
-            <svg
-              className="mt-px"
-              width="6"
-              height="9"
-              viewBox="0 0 6 9"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m1 1 4 3.5L1 8"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </p>
-        </div>
+    <div className="min-h-screen w-full bg-white relative">
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(45deg, transparent, transparent 3px, #c2c3c5 3px, #c2c3c5 4px), repeating-linear-gradient(-45deg, transparent, transparent 3px, #c2c3c5 3px, #c2c3c5 4px)",
+          backgroundSize: "50% 100%, 50% 100%",
+          backgroundPosition: "left top, right top",
+          backgroundRepeat: "repeat-y, repeat-y",
+        }}
+      />
 
-        <h1 className="text-center text-[40px] leading-12 md:text-6xl md:leading-17.5 mt-4 font-semibold max-w-3xl">
-          Turn ideas into websites instantly, with AI.
-        </h1>
-
-        <p className="text-center text-base max-w-md mt-2">
-          Skip the boilerplate. Just describe what you need, and watch your
-          website come to life.
-        </p>
-
-        <form
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              onSubmitHandler(e);
-            }
-          }}
-          onSubmit={onSubmitHandler}
-          className="bg-black/80 max-w-2xl w-full rounded-xl p-4 mt-10 border border-indigo-600/70 focus-within:ring-2 ring-indigo-500 transition-all"
-        >
-          <textarea
-            onChange={(e) => setInput(e.target.value)}
-            className="bg-transparent outline-none text-gray-300 resize-none w-full"
-            rows={4}
-            placeholder="What are we building today?"
-            required
-          />
-          <button className="ml-auto flex items-center gap-2 bg-linear-to-r from-[#CB52D4] to-indigo-600 rounded-md px-4 py-2">
-            {isLoading ? (
-              <>
-                Creating <Loader className="animate-spin size-4 text-white" />
-              </>
-            ) : (
-              "Build Now"
-            )}
-          </button>
-        </form>
-
-        {/* Demo Video Section */}
-        <div className="mt-16 w-full max-w-3xl text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            See Flux in Action
-          </h2>
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700 shadow-lg shadow-indigo-500/10">
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/YHdVngPlj1g?rel=0&modestbranding=1"
-              title="Flux Demo Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      </section>
-    </>
+      <div className="relative z-10 max-w-7xl mx-auto flex-1 border">
+        <Hero />
+        <Features />
+        <CTA />
+        <Demo />
+        <Footer />
+      </div>
+    </div>
   );
 };
 

@@ -102,7 +102,7 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
       }
     };
     return (
-      <div className="relative h-full bg-zinc-900 rounded-xl overflow-hidden max-sm:ml-2">
+      <div className="relative h-full overflow-hidden border border-border bg-card shadow-md max-sm:ml-2">
         {project.current_code ? (
           <>
             <iframe

@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import openai from "../config/openai.js";
 import { prisma } from "../lib/prisma.js";
 
+const INTERNAL_ERROR_MESSAGE = "Something went wrong. Please try again.";
+
 // fetch user credits
 export const getUserCredits = async (req: Request, res: Response) => {
   try {
@@ -22,7 +24,7 @@ export const getUserCredits = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("error:: ", error.message);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -287,7 +289,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
     }
     console.error("error:: ", error.message);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -325,7 +327,7 @@ export const getUserProject = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("error:: ", error.message);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -353,7 +355,7 @@ export const getUserAllProjects = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("error:: ", error.message);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };
@@ -395,7 +397,7 @@ export const togglePublish = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("error:: ", error.message);
     return res.status(500).json({
-      message: error.message,
+      message: INTERNAL_ERROR_MESSAGE,
     });
   }
 };

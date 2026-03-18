@@ -1,7 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
-import Footer from "./components/Footer";
-import GradientBlinds from "./components/GradientBlinds";
 import NavBar from "./components/NavBar";
 import { useHealthCheck } from "./hooks/useHealthCheck";
 import AuthPage from "./pages/auth/AuthPage";
@@ -21,30 +19,14 @@ const App = () => {
     pathname.startsWith("/view/") ||
     pathname.startsWith("/preview/");
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen w-full relative">
       <Toaster />
       {!hideNavBar && (
         <>
           <NavBar />
-          <div className="fixed inset-0 -z-10">
-            <GradientBlinds
-              gradientColors={["#5905ad", "#0154c1"]}
-              angle={150}
-              noise={0}
-              blindCount={20}
-              blindMinWidth={70}
-              spotlightRadius={0.75}
-              spotlightSoftness={0.75}
-              spotlightOpacity={1}
-              mouseDampening={0.2}
-              distortAmount={10}
-              shineDirection="left"
-              mixBlendMode="lighten"
-            />
-          </div>
         </>
       )}
-      <main className="flex-1">
+      <main className={`flex-1 ${hideNavBar ? "pt-0" : "pt-16"}`}>
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/projects/:projectId"} element={<Projects />} />
@@ -60,7 +42,6 @@ const App = () => {
           <Route path="/account/settings" element={<SettingsPage />} />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 };

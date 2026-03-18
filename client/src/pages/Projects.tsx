@@ -127,18 +127,18 @@ const Projects = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-[80vh]">
-        <Loader2 className="size-8 animate-spin text-violet-200" />
+      <div className="flex h-[80vh] items-center justify-center bg-background">
+        <Loader2 className="size-8 animate-spin text-accent" />
       </div>
     );
   }
 
   return project ? (
-    <div className="bg-zinc-900 flex flex-col h-screen w-full text-zinc-100">
+    <div className="flex h-screen w-full flex-col bg-background text-foreground">
       {/* Builder Navbar */}
-      <div className="flex max-sm:flex-col sm:items-center gap-4 px-4 py-2 no-scrollbar">
+      <div className="flex gap-4 border-b border-border bg-card px-4 py-3 max-sm:flex-col sm:items-center sm:justify-between no-scrollbar">
         {/* Left */}
-        <div className="flex items-center gap-2 sm:min-w-90 text-nowrap">
+        <div className="flex items-center gap-3 text-nowrap sm:min-w-0 sm:flex-1">
           <img
             src="/favicon.png"
             alt="Flux logo"
@@ -146,14 +146,14 @@ const Projects = () => {
             className="h-6 cursor-pointer"
           />
           <div className="max-w-64 sm:max-w-xs">
-            <p className="text-zinc-100 text-lg font-medium capitalize truncate">
+            <p className="truncate text-lg font-medium capitalize text-foreground">
               {project.name}
             </p>
-            <p className="text-zinc-400 text-sm -mt-0.5">
+            <p className="-mt-0.5 text-sm text-muted-foreground">
               Previewing last saved version
             </p>
           </div>
-          <div className="sm:hidden flex flex-1 justify-end">
+          <div className="flex flex-1 justify-end sm:hidden">
             {isMenuOpen ? (
               <MessageSquare
                 onClick={() => setIsMenuOpen(false)}
@@ -168,26 +168,26 @@ const Projects = () => {
           </div>
         </div>
         {/* Center */}
-        <div className="hidden sm:flex gap-2 bg-zinc-950 p-1 rounded-md">
+        <div className="hidden shrink-0 gap-2 border border-border bg-background p-1 shadow-sm sm:flex">
           <Smartphone
             onClick={() => setDevice("phone")}
-            className={`size-6 cursor-pointer p-1 rounded ${device === "phone" ? "bg-zinc-700" : ""}`}
+            className={`size-7 cursor-pointer border p-1 transition-colors active:shadow-none ${device === "phone" ? "border-border bg-muted shadow-sm" : "border-transparent bg-transparent"}`}
           />
           <Tablet
             onClick={() => setDevice("tablet")}
-            className={`size-6 cursor-pointer p-1 rounded ${device === "tablet" ? "bg-zinc-700" : ""}`}
+            className={`size-7 cursor-pointer border p-1 transition-colors active:shadow-none ${device === "tablet" ? "border-border bg-muted shadow-sm" : "border-transparent bg-transparent"}`}
           />
           <Monitor
             onClick={() => setDevice("desktop")}
-            className={`size-6 cursor-pointer p-1 rounded ${device === "desktop" ? "bg-zinc-700" : ""}`}
+            className={`size-7 cursor-pointer border p-1 transition-colors active:shadow-none ${device === "desktop" ? "border-border bg-muted shadow-sm" : "border-transparent bg-transparent"}`}
           />
         </div>
         {/* Right */}
-        <div className="flex items-center justify-end gap-3 flex-1 text-xs sm:text-sm">
+        <div className="flex flex-1 flex-wrap items-center justify-end gap-3 text-xs sm:text-sm">
           <button
             onClick={() => saveProject()}
             disabled={isSaving}
-            className="max-sm:hidden bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-4 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-zinc-700"
+            className="max-sm:hidden flex items-center gap-2 border border-border bg-card px-4 py-1 text-foreground shadow-sm active:shadow-none transition-colors hover:bg-muted disabled:opacity-60"
           >
             {isSaving ? (
               <Loader2 size={16} className="animate-spin" />
@@ -199,7 +199,7 @@ const Projects = () => {
             )}
           </button>
           <Link
-            className="px-4 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-zinc-700 hover:border-zinc-500"
+            className="flex items-center gap-2 border border-border bg-card px-4 py-1 text-foreground shadow-sm active:shadow-none transition-colors hover:bg-muted"
             to={`/preview/${projectId}`}
             target="_blank"
           >
@@ -208,21 +208,21 @@ const Projects = () => {
           </Link>
           <button
             onClick={() => downloadCode()}
-            className="bg-linear-to-br from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 flex px-4 py-1 rounded items-center gap-2 sm:rounded-sm transition-colors"
+            className="flex items-center gap-2 border border-border bg-secondary px-4 py-1 text-secondary-foreground shadow-sm active:shadow-none transition-colors hover:bg-secondary/90"
           >
             <ArrowBigDown size={16} />
             Download
           </button>
           <button
             onClick={() => togglePublish()}
-            className="bg-linear-to-br from-purple-500 to-purple-700 hover:from-purple-700 hover:to-purple-500 flex px-4 py-1 rounded items-center gap-2 sm:rounded-sm transition-colors"
+            className="flex items-center gap-2 border border-border bg-accent px-4 py-1 text-accent-foreground shadow-sm active:shadow-none transition-colors hover:bg-accent/90"
           >
             {project.isPublished ? <EyeClosed size={16} /> : <Eye size={16} />}
             {project.isPublished ? "Unpublish" : "Publish"}
           </button>
         </div>
       </div>
-      <div className="flex flex-1 overflow-auto">
+      <div className="flex flex-1 overflow-auto bg-muted/40 p-3">
         <div>
           <SideBar
             isMenuOpen={isMenuOpen}
@@ -232,7 +232,7 @@ const Projects = () => {
             setIsGenerating={setIsGenerating}
           />
         </div>
-        <div className="p-2 pl-0 flex-1">
+        <div className="flex-1 pl-0 sm:pl-3">
           <ProjectPreview
             project={project}
             isGenerating={isGenerating}
@@ -243,8 +243,8 @@ const Projects = () => {
       </div>
     </div>
   ) : (
-    <div className="h-[80vh] flex items-center justify-center w-full">
-      <p className="text-2xl font-medium text-zinc-200">
+    <div className="flex h-[80vh] w-full items-center justify-center bg-background">
+      <p className="text-2xl font-medium text-muted-foreground">
         Unable to load project!
       </p>
     </div>
