@@ -26,29 +26,18 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center text-foreground px-4 overflow-hidden min-h-[92vh]">
-      {/* White Sphere Grid Background */}
+    <section className="relative flex flex-col items-center justify-center bg-background text-foreground px-4 overflow-hidden min-h-[92vh]">
+      {/* Soft Yellow Glow */}
       <div
         className="absolute inset-0 z-0"
         style={{
-          background: "white",
           backgroundImage: `
-       linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px),
-       linear-gradient(to bottom, rgba(71,85,105,0.3) 1px, transparent 1px),
-       radial-gradient(circle at 50% 50%, rgba(139,92,246,0.25) 0%, rgba(139,92,246,0.1) 40%, transparent 80%)
-     `,
-          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
+        radial-gradient(circle at center, #FFF991 0%, transparent 50%)
+      `,
+          opacity: 0.6,
+          mixBlendMode: "multiply",
         }}
       />
-      {/* Background: teal glow from bottom */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.6, ease: "easeOut" }}
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-      ></motion.div>
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full">
         {/* Badge */}
@@ -85,17 +74,21 @@ const Hero = () => {
         >
           <motion.button
             onClick={handleCTA}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 380, damping: 22 }}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", duration: 0.3 }}
             className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-colors duration-200 w-full sm:w-auto"
           >
             Start for free
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{
+              type: "spring",
+              duration: 0.3,
+            }}
             className="group flex items-center gap-2 bg-card/40 backdrop-blur-md border border-border/10 hover:border-border/20 text-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-all duration-200 w-full sm:w-auto"
           >
             <Play
