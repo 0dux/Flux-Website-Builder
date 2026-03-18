@@ -51,16 +51,15 @@ const CTA = () => {
   return (
     <section className="relative overflow-hidden bg-background px-4 py-16 text-foreground md:px-6">
       <div className="relative mx-auto max-w-5xl border border-border bg-card px-6 py-10 shadow-lg md:px-10 md:py-14">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-32 opacity-80 blur-3xl"
-          style={{
-            background:
-              "linear-gradient(to right, color-mix(in oklab, var(--color-chart-1) 30%, transparent), color-mix(in oklab, var(--color-chart-3) 30%, transparent), color-mix(in oklab, var(--color-accent) 30%, transparent))",
-          }}
-        />
-
         <div className="relative z-10 flex flex-col items-center text-center">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-32 opacity-80 blur-3xl"
+            style={{
+              background:
+                "linear-gradient(to right, color-mix(in oklab, var(--color-chart-1) 30%, transparent), color-mix(in oklab, var(--color-chart-3) 30%, transparent), color-mix(in oklab, var(--color-accent) 30%, transparent))",
+            }}
+          />
           <motion.div {...fadeUp(0.05)}>
             <div className="inline-flex items-center gap-2 border border-border bg-background px-4 py-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground shadow-sm">
               <span className="inline-block size-2 bg-primary" />
@@ -115,7 +114,7 @@ const CTA = () => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="flex items-center gap-2 border border-border bg-accent px-5 py-2 text-sm font-medium text-accent-foreground shadow-sm transition-colors duration-200 hover:bg-accent/90"
+                  className="flex items-center gap-2 border border-border bg-accent px-5 py-2 text-sm font-medium text-accent-foreground shadow-sm active:shadow-none transition-colors duration-200 hover:bg-accent/90"
                 >
                   {isLoading ? (
                     <>

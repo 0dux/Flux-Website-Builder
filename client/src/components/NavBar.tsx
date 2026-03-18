@@ -169,13 +169,13 @@ const NavBar = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="px-6 py-1.5 max-sm:text-sm bg-accent hover:bg-accent/90 text-accent-foreground transition-colors border border-border shadow-sm"
+              className="px-6 py-1.5 max-sm:text-sm bg-accent hover:bg-accent/90 text-accent-foreground transition-colors border border-border shadow-sm active:shadow-none"
             >
               Get started
             </motion.button>
           ) : (
             <>
-              <button className="border border-border bg-muted shadow-sm px-5 py-1 text-xs sm:text-sm">
+              <button className="border border-border bg-muted shadow-sm active:shadow-none px-5 py-1 text-xs sm:text-sm">
                 Credits <span className="text-accent">{credits ?? "..."}</span>
               </button>
               <UserButton size="icon" />
@@ -258,7 +258,7 @@ const NavBar = () => {
               stiffness: 300,
               damping: 20,
             }}
-            className="active:ring-3 active:ring-foreground/20 aspect-square size-10 p-1 items-center justify-center bg-background hover:bg-muted text-foreground rounded-md flex transition"
+            className="active:ring-3 active:ring-foreground/20 active:shadow-none aspect-square size-10 p-1 items-center justify-center bg-background hover:bg-muted text-foreground rounded-md flex transition"
             onClick={() => setMenuOpen(false)}
           >
             <svg

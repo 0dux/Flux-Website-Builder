@@ -2,6 +2,8 @@ import { authClient } from "@/lib/auth-client";
 import { Layers, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { AuroraText } from "../ui/aurora-text";
+import { LineShadowText } from "../ui/line-shadow-text";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -59,9 +61,15 @@ const Hero = () => {
           {...fadeUp(0.17)}
           className="text-[44px] leading-[1.1] md:text-[72px] md:leading-[1.08] tracking-tight text-foreground mb-6"
         >
-          Turn ideas into websites
-          <br />
-          instantly, with AI.
+          From one{" "}
+          <LineShadowText className="font-semibold italic">
+            prompt
+          </LineShadowText>{" "}
+          to
+          <br />a <AuroraText className="font-semibold ">
+            website
+          </AuroraText>{" "}
+          people remember.
         </motion.h1>
 
         {/* Sub-headline */}
@@ -69,8 +77,9 @@ const Hero = () => {
           {...fadeUp(0.29)}
           className="text-[15px] md:text-base text-muted-foreground max-w-120 leading-[1.7] mb-10"
         >
-          Your AI website builder describes, designs, and deploys sites
-          instantly. Go from prompt to live site in minutes, not hours.
+          Flux turns rough ideas into polished website drafts fast, so you can
+          spend less time wiring things up and more time shaping something worth
+          shipping.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -83,7 +92,7 @@ const Hero = () => {
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", duration: 0.3 }}
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-colors duration-200 w-full sm:w-auto"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg active:shadow-none transition-colors duration-200 w-full sm:w-auto"
           >
             {session?.user ? "Build now" : "Start for free"}
           </motion.button>
@@ -96,7 +105,7 @@ const Hero = () => {
               type: "spring",
               duration: 0.3,
             }}
-            className="group flex items-center gap-2 bg-card/40 backdrop-blur-md border border-border/10 hover:border-border/20 text-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-all duration-200 w-full sm:w-auto"
+            className="group flex items-center gap-2 bg-card/40 backdrop-blur-md border border-border/10 hover:border-border/20 text-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg active:shadow-none transition-all duration-200 w-full sm:w-auto"
           >
             <Play
               size={14}
