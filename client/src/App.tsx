@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
-import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import { useHealthCheck } from "./hooks/useHealthCheck";
 import AuthPage from "./pages/auth/AuthPage";
@@ -43,7 +42,6 @@ const App = () => {
           <Route path="/account/settings" element={<SettingsPage />} />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 };

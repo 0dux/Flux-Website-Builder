@@ -1,4 +1,5 @@
 import CTA from "@/components/home/CTA";
+import Footer from "@/components/Footer";
 import Demo from "@/components/home/Demo";
 import Features from "@/components/home/Features";
 import Hero from "@/components/home/Hero";
@@ -22,6 +23,7 @@ const Home = () => {
         <Features />
         <CTA />
         <Demo />
+        <Footer />
       </div>
     </div>
   );

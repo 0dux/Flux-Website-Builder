@@ -13,7 +13,10 @@ const fadeUp = (delay = 0) => ({
 
 const Demo = () => {
   return (
-    <section className="relative overflow-hidden bg-background px-4 py-16 text-foreground md:px-6">
+    <section
+      id="demo"
+      className="relative overflow-hidden bg-background px-4 py-16 text-foreground md:px-6"
+    >
       <div className="relative mx-auto max-w-5xl">
         <motion.div
           {...fadeUp(0.05)}

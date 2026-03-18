@@ -25,6 +25,12 @@ const Hero = () => {
     }
   };
 
+  const handleWatchDemo = () => {
+    document
+      .getElementById("demo")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section className="relative flex flex-col items-center justify-center bg-background text-foreground px-4 overflow-hidden min-h-[88vh]">
       {/* Soft Yellow Glow */}
@@ -79,10 +85,11 @@ const Hero = () => {
             transition={{ type: "spring", duration: 0.3 }}
             className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-sm px-8 py-3 rounded-full shadow-lg transition-colors duration-200 w-full sm:w-auto"
           >
-            Start for free
+            {session?.user ? "Build now" : "Start for free"}
           </motion.button>
 
           <motion.button
+            onClick={handleWatchDemo}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
             transition={{
