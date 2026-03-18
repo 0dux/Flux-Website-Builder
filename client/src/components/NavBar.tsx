@@ -3,7 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import { UserButton } from "@daveyplate/better-auth-ui";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { assets } from "../assets/assets";
 
@@ -12,6 +12,7 @@ const SHOW_AFTER_PX = 30; // accumulated upward px before showing
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [credits, setCredits] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,6 +26,12 @@ const NavBar = () => {
   const accumulatedUp = useRef(0);
 
   const { data: session, isPending } = authClient.useSession();
+  const navLinks = [
+    { label: "Home", to: "/" },
+    { label: "Features", to: "#features" },
+    ...(session?.user ? [{ label: "My Projects", to: "/projects" }] : []),
+    { label: "Community", to: "/community" },
+  ];
 
   const getCredits = async () => {
     try {
@@ -34,6 +41,26 @@ const NavBar = () => {
       toast.error(error?.reponse?.data?.message || error.message);
       console.error(error);
     }
+  };
+
+  const handleFeaturesClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/#features");
+
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          document
+            .getElementById("features")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      });
+
+      return;
+    }
+
+    document
+      .getElementById("features")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   useEffect(() => {
@@ -95,7 +122,7 @@ const NavBar = () => {
           duration: 0.35,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 border-b text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md border-border/10" : "border-transparent"}`}
+        className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-3 px-4 md:px-16 lg:px-24 xl:px-32 border-b   border-2 text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md" : ""}`}
       >
         <Link to="/">
           <motion.img
@@ -109,11 +136,7 @@ const NavBar = () => {
         </Link>
 
         <div className="hidden md:flex items-center gap-8 transition duration-500">
-          {[
-            { label: "Home", to: "/" },
-            { label: "My Projects", to: "/projects" },
-            { label: "Community", to: "/community" },
-          ].map(({ label, to }) => (
+          {navLinks.map(({ label, to }) => (
             <motion.div
               key={to}
               whileHover={{ y: -1 }}
@@ -121,7 +144,15 @@ const NavBar = () => {
             >
               <Link
                 to={to}
-                className="text-foreground/80 hover:text-foreground transition-colors duration-200"
+                onClick={
+                  to === "#features"
+                    ? (e) => {
+                        e.preventDefault();
+                        handleFeaturesClick();
+                      }
+                    : undefined
+                }
+                className="border-b-2 border-transparent px-1 py-1 text-foreground/80 transition-all duration-200 hover:border-foreground hover:text-foreground"
               >
                 {label}
               </Link>
@@ -138,13 +169,13 @@ const NavBar = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="px-6 py-1.5 max-sm:text-sm bg-accent hover:bg-accent/90 text-accent-foreground transition-colors rounded"
+              className="px-6 py-1.5 max-sm:text-sm bg-accent hover:bg-accent/90 text-accent-foreground transition-colors border border-border shadow-sm"
             >
               Get started
             </motion.button>
           ) : (
             <>
-              <button className="border border-dashed border-border/30 bg-muted rounded-2xl px-5 py-1 text-xs sm:text-sm">
+              <button className="border border-border bg-muted shadow-sm px-5 py-1 text-xs sm:text-sm">
                 Credits <span className="text-accent">{credits ?? "..."}</span>
               </button>
               <UserButton size="icon" />
@@ -188,11 +219,7 @@ const NavBar = () => {
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-100 backdrop-blur-md bg-background/70 text-foreground flex flex-col items-center justify-center text-lg gap-8 md:hidden"
         >
-          {[
-            { label: "Home", to: "/" },
-            { label: "My Projects", to: "/projects" },
-            { label: "Community", to: "/community" },
-          ].map(({ label, to }, i) => (
+          {navLinks.map(({ label, to }, i) => (
             <motion.div
               key={to}
               initial={{ opacity: 0, y: 20 }}
@@ -206,8 +233,16 @@ const NavBar = () => {
             >
               <Link
                 to={to}
-                onClick={() => setMenuOpen(false)}
-                className="hover:text-muted-foreground transition"
+                onClick={
+                  to === "#features"
+                    ? (e) => {
+                        e.preventDefault();
+                        setMenuOpen(false);
+                        handleFeaturesClick();
+                      }
+                    : () => setMenuOpen(false)
+                }
+                className="border-b-2 border-transparent px-2 py-2 text-foreground transition-all duration-200 hover:border-foreground hover:text-foreground"
               >
                 {label}
               </Link>

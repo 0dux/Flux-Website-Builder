@@ -26,7 +26,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center bg-background text-foreground px-4 overflow-hidden min-h-[92vh]">
+    <section className="relative flex flex-col items-center justify-center bg-background text-foreground px-4 overflow-hidden min-h-[88vh]">
       {/* Soft Yellow Glow */}
       <div
         className="absolute inset-0 z-0"
