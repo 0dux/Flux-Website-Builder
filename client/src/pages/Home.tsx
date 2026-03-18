@@ -8,7 +8,10 @@ const Home = () => {
         className="absolute inset-0 z-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, transparent, transparent 2px, #f3f4f6 2px, #f3f4f6 4px)",
+            "repeating-linear-gradient(45deg, transparent, transparent 3px, #c2c3c5 3px, #c2c3c5 4px), repeating-linear-gradient(-45deg, transparent, transparent 3px, #c2c3c5 3px, #c2c3c5 4px)",
+          backgroundSize: "50% 100%, 50% 100%",
+          backgroundPosition: "left top, right top",
+          backgroundRepeat: "repeat-y, repeat-y",
         }}
       />
 
