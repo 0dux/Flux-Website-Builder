@@ -1,3 +1,5 @@
+import CTA from "@/components/home/CTA";
+import Demo from "@/components/home/Demo";
 import Features from "@/components/home/Features";
 import Hero from "@/components/home/Hero";
 
@@ -18,6 +20,8 @@ const Home = () => {
       <div className="relative z-10 max-w-7xl mx-auto flex-1 border">
         <Hero />
         <Features />
+        <CTA />
+        <Demo />
       </div>
     </div>
   );
