@@ -97,7 +97,7 @@ export const createNewProject = async (req: Request, res: Response) => {
     // (which would try to send a second response → ERR_HTTP_HEADERS_SENT).
     try {
       const promptEnhanceResponse = await openai.chat.completions.create({
-        model: "google/gemini-3-flash-preview",
+        model: "nvidia/nemotron-3-super-120b-a12b:free",
         messages: [
           {
             role: "system",

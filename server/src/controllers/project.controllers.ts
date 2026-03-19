@@ -67,7 +67,7 @@ export const makeRevisions = async (req: Request, res: Response) => {
     });
 
     const promptEnhanceResponse = await openai.chat.completions.create({
-      model: "google/gemini-3-flash-preview",
+      model: "nvidia/nemotron-3-super-120b-a12b:free",
       messages: [
         {
           role: "system",
