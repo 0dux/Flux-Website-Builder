@@ -168,7 +168,7 @@ const MyProjects = () => {
             </h1>
             <button
               onClick={() => {
-                navigate("/");
+                navigate("/prompt");
               }}
               className="flex items-center gap-2 border border-border bg-accent px-3 py-2 text-sm font-medium text-accent-foreground shadow-sm active:shadow-none transition-colors hover:bg-accent/90 sm:px-6"
             >
