@@ -19,9 +19,15 @@ const Hero = () => {
   const { data: session } = authClient.useSession();
   const navigate = useNavigate();
 
+  const handleButtonCTA = () => {
+    document
+      .getElementById("CTA")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const handleCTA = () => {
     if (session?.user) {
-      navigate("/projects");
+      handleButtonCTA();
     } else {
       navigate("/auth/signin");
     }

@@ -60,7 +60,7 @@ const CTA = () => {
                 "linear-gradient(to right, color-mix(in oklab, var(--color-chart-1) 30%, transparent), color-mix(in oklab, var(--color-chart-3) 30%, transparent), color-mix(in oklab, var(--color-accent) 30%, transparent))",
             }}
           />
-          <motion.div {...fadeUp(0.05)}>
+          <motion.div id="CTA" {...fadeUp(0.05)}>
             <div className="inline-flex items-center gap-2 border border-border bg-background px-4 py-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground shadow-sm">
               <span className="inline-block size-2 bg-primary" />
               Start building with Flux

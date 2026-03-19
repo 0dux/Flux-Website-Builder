@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import MyProjects from "./pages/MyProjects";
 import Preview from "./pages/Preview";
 import Projects from "./pages/Projects";
+import Prompt from "./pages/Prompt";
 import SettingsPage from "./pages/SettingsPage";
 import View from "./pages/View";
 
@@ -29,6 +30,7 @@ const App = () => {
       <main className={`flex-1 ${hideNavBar ? "pt-0" : "pt-16"}`}>
         <Routes>
           <Route path={"/"} element={<Home />} />
+          <Route path={"/prompt"} element={<Prompt />} />
           <Route path={"/projects/:projectId"} element={<Projects />} />
           <Route path={"/projects"} element={<MyProjects />} />
           <Route path={"/preview/:projectId"} element={<Preview />} />
