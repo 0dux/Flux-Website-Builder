@@ -122,7 +122,7 @@ const NavBar = () => {
           duration: 0.35,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-3 px-4 md:px-16 lg:px-24 xl:px-32 border-b   border-2 text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md" : ""}`}
+        className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between w-full py-3 px-4 md:px-16 lg:px-24 xl:px-32 border-b min-h-16 border-2 text-foreground transition-all duration-300 ${scrolled ? "backdrop-blur-md" : ""}`}
       >
         <Link to="/" className="flex items-center">
           <motion.img
