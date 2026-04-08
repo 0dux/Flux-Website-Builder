@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://flux-website-builder.onrender.com/api/:path*"
+      "destination": "https://flux-website-builder-production.up.railway.app/api/:path*"
     },
     {
       "source": "/(.*)",
