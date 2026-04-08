@@ -200,6 +200,28 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
         max_tokens: 11000,
       });
 
+      const promptTokenCount = codeGenerationResponse?.usage?.prompt_tokens;
+      const completionTokenCount =
+        codeGenerationResponse?.usage?.completion_tokens;
+      const totalTokenCount = codeGenerationResponse?.usage?.total_tokens;
+      const finishReason = codeGenerationResponse?.choices?.[0]?.finish_reason;
+
+      console.log(
+        "codegen::tokens",
+        JSON.stringify(
+          {
+            model: "google/gemini-3-flash-preview",
+            max_tokens: 11000,
+            prompt_tokens: promptTokenCount,
+            completion_tokens: completionTokenCount,
+            total_tokens: totalTokenCount,
+            finish_reason: finishReason,
+          },
+          null,
+          2,
+        ),
+      );
+
       // Safely access choices here too
       const code = codeGenerationResponse?.choices?.[0]?.message?.content || "";
 
