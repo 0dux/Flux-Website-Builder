@@ -86,7 +86,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
           content: `User request :: "${message}"`,
         },
       ],
-      max_tokens: 500,
+      max_tokens: 300,
     });
 
     const enhancedPrompt =
@@ -144,7 +144,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
           content: `Here is the current website code:"${currentProject.current_code}" The user wants this change:"${enhancedPrompt}"`,
         },
       ],
-      max_tokens: 11000,
+      max_tokens: 8000,
     });
 
     const code = codeGenerationResponse?.choices?.[0]?.message?.content || "";

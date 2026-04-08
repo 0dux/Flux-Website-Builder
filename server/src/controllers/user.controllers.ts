@@ -118,7 +118,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             content: initial_prompt,
           },
         ],
-        max_tokens: 500,
+        max_tokens: 300,
       });
 
       // Safely access choices to prevent "Cannot read properties of undefined (reading '0')"
@@ -197,7 +197,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             content: enhancedPrompt || "",
           },
         ],
-        max_tokens: 11000,
+        max_tokens: 8000,
       });
 
       const promptTokenCount = codeGenerationResponse?.usage?.prompt_tokens;
