@@ -197,7 +197,7 @@ Return ONLY the enhanced prompt, nothing else. Make it detailed but concise (2-3
             content: enhancedPrompt || "",
           },
         ],
-        max_tokens: 12000,
+        max_tokens: 11000,
       });
 
       // Safely access choices here too

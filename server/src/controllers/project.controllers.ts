@@ -144,7 +144,7 @@ Return ONLY the enhanced request, nothing else. Keep it concise (1-2 sentences).
           content: `Here is the current website code:"${currentProject.current_code}" The user wants this change:"${enhancedPrompt}"`,
         },
       ],
-      max_tokens: 12000,
+      max_tokens: 11000,
     });
 
     const code = codeGenerationResponse?.choices?.[0]?.message?.content || "";
