@@ -41,7 +41,7 @@ const Demo = () => {
         >
           <iframe
             className="absolute inset-0 h-full w-full"
-            src="https://www.youtube.com/embed/YHdVngPlj1g?rel=0&modestbranding=1"
+            src="https://youtu.be/HOjH3C0DaaQ?si=oKfkB9VFDFauJZKl"
             title="Flux Demo Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
